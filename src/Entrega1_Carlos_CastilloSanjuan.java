@@ -1,13 +1,13 @@
 import java.util.Locale;
 import java.util.Scanner;
 
-public class UPMBank {
+public class Entrega1_Carlos_CastilloSanjuan {
 
     // Variables estaticas
 
     static float saldo = 0;
-    static String transacciones = "\n", datos = "\n", nombre = "", apellidos = "", dni = "" ,correo = "", nombape = "", diaString = "",
-                                    mesString = "", ncuenta = "";
+    static String transacciones = "\n", datos = "\n", nombre = "", apellidos = "", dni = "", correo = "", nombape = "", diaString = "",
+            mesString = "", ncuenta = "";
     static final int FIJOCE = 9010, FIJOCS = 201;
     static int dia = 0, mes = 0, year = 0, d1 = 0, d2 = 0, d3 = 0, d4 = 0, d5 = 0, d6 = 0, d7 = 0, d8 = 0, d9 = 0, d10 = 0;
     static char letradni = 0;
@@ -55,28 +55,28 @@ public class UPMBank {
 
         int selectOption = scan.nextInt();
 
-            switch (selectOption) {
-                case 0:
-                    System.out.println("--------------------------------");
-                    System.out.println("*** Has finalizado la sesion ***");
-                    System.out.println("--------------------------------");
-                    break;
-                case 1:
-                    nuevoCliente();
-                    break;
-                case 2:
-                    cuentabancaria();
-                    break;
-                case 3:
-                    bancariaCreada();
-                    break;
-                case 4:
-                    menuTransacciones();
-                    break;
-                default:
-                    System.out.print("Caracter invalido");
-                    menu();
-            }
+        switch (selectOption) {
+            case 0:
+                System.out.println("--------------------------------");
+                System.out.println("*** Has finalizado la sesion ***");
+                System.out.println("--------------------------------");
+                break;
+            case 1:
+                nuevoCliente();
+                break;
+            case 2:
+                cuentabancaria();
+                break;
+            case 3:
+                bancariaCreada();
+                break;
+            case 4:
+                menuTransacciones();
+                break;
+            default:
+                System.out.print("Caracter invalido");
+                menu();
+        }
     }
 
 
@@ -119,7 +119,7 @@ public class UPMBank {
 
         // Comprobacion fecha de nacimiento
 
-        if (validacionFecha(dia, mes, year)){
+        if (validacionFecha(dia, mes, year)) {
             System.out.println("La fecha de nacimiento es: " + diaString + "/" + mesString + "/" + year);
         }
 
@@ -190,7 +190,7 @@ public class UPMBank {
         return true;
     }
 
-    public static boolean validacionCorreo(){
+    public static boolean validacionCorreo() {
 
         /*
             VALIDACION DEL CORREO ELECTRONICO
@@ -208,7 +208,7 @@ public class UPMBank {
         return true;
     }
 
-    public static boolean validacionDNI(){
+    public static boolean validacionDNI() {
 
         /*
             VALIDACION DEL DNI
@@ -241,10 +241,10 @@ public class UPMBank {
         Scanner scan = new Scanner(System.in);
 
         // Nombre y apellidos del cliente
-        if(usuario == false){
+        if (usuario == false) {
             System.out.println("** Debes dar de alta a un cliente **");
             menu();
-        }else {
+        } else {
 
             System.out.print("Introduce el nombre del cliente: ");
             nombre = scan.nextLine();
@@ -371,7 +371,7 @@ public class UPMBank {
         long numd10 = Long.valueOf(d10);
 
 
-        String ncString = String.valueOf(numd1)+numd2+numd3+numd4+numd5+numd6+numd7+numd8+numd9+numd10;
+        String ncString = String.valueOf(numd1) + numd2 + numd3 + numd4 + numd5 + numd6 + numd7 + numd8 + numd9 + numd10;
 
         Long ncf = Long.parseLong(ncString);
 
@@ -391,10 +391,10 @@ public class UPMBank {
 
         Scanner scan = new Scanner(System.in);
 
-        if(usuario == false || iban == false){
+        if (usuario == false || iban == false) {
             System.out.println("** Debes dar de alta a un cliente y tener una cuenta bancaria creada **");
             menu();
-        }else {
+        } else {
 
             System.out.println("¿Que es lo que quieres hacer?\n\t1) Ingresar\n\t2) Extraccion \n\t3) Transferencia\n\t4) Prestamo hipotecarios\n\t0) Salir");
             System.out.print("Introduzca tu opcion: ");
@@ -468,12 +468,12 @@ public class UPMBank {
         System.out.println("Bienvenido a el apartado de EXTRACCIONES");
         System.out.print("¿Cual es la cantidad que quieres extraer? ");
         extraer = scan.nextFloat();
-        if(extraer > saldo){
+        if (extraer > saldo) {
             System.out.println("No tienes dinero suficiente en tu saldo");
-        }else{
-                saldo -= extraer;
-                System.out.println("El saldo de su cuenta es de: " + saldo + "€");
-            }
+        } else {
+            saldo -= extraer;
+            System.out.println("El saldo de su cuenta es de: " + saldo + "€");
+        }
 
         // Se añadira a la variable transacciones la extraccion realizada
 
@@ -501,9 +501,9 @@ public class UPMBank {
         System.out.println("Bienvenido a el apartado de TRANFERENCIAS");
         System.out.print("¿Cual es la cantidad que quieres tranferir? ");
         tranferir = scan.nextFloat();
-        if (tranferir > saldo){
+        if (tranferir > saldo) {
             System.out.println("No tienes dinero suficiente en tu saldo");
-        }else {
+        } else {
             System.out.println("Introduzca el numero de cuenta al que quieres hacer una tranferencia: ");
             do {
                 System.out.print("Introduzca el CE(4 digitos) de tu universidad: \n");
@@ -520,7 +520,7 @@ public class UPMBank {
             do {
                 System.out.print("Introduzca el NC(10 digitos): \n");
                 nctranferencia = scan.nextLong();
-            } while (cstranferencia < 0 || cstranferencia > 99999999999L);
+            } while (nctranferencia < 0 || nctranferencia > 9999999999L);
 
 
             System.out.printf("Haciendo tranferencia a la cuenta: %2d %2d %2d %2d", cetranferencia, cstranferencia, dctranferencia, nctranferencia);
@@ -551,18 +551,15 @@ public class UPMBank {
         System.out.println("Bienvenido a el apartado de PRESTAMOS HIPOTECARIO");
         System.out.print("Introduzca el capital solicitado: ");
         float capital = scan.nextInt();
-
+        float interes;
         // Interes anual
 
-        System.out.print("Introduzca el interes anual (en tanto por ciento): ");
-        float interes = scan.nextInt();
-        interes = interes / 100f;
-        if (interes > 1) {
-            System.out.println("No puede haber un interes mayor del 100%");
-        }else{
+        do{
             System.out.print("Introduzca el interes anual (en tanto por ciento): ");
             interes = scan.nextInt();
-        }
+        }while(interes < 0 || interes > 100);
+
+        interes = interes / 100f;
         double imes = interes / 12;
 
         // Years
@@ -609,10 +606,10 @@ public class UPMBank {
 
         Scanner scan = new Scanner(System.in);
 
-        if(usuario == false || iban == false){
+        if (usuario == false || iban == false) {
             System.out.println("** Debes dar de alta a un cliente y tener una cuenta bancaria creada **");
             menu();
-        }else {
+        } else {
 
             System.out.println("¿Que es lo que quieres ver?\n\t1) Datos\n\t2) Transacciones \n\t0) Salir");
             System.out.print("Introduzca tu opcion: ");
