@@ -47,8 +47,8 @@ public class UPMBank {
         System.out.println("Elige una opcion");
         System.out.println("    1) Dar de alto nuevo cliente");
         System.out.println("    2) Crear una nueva cuenta bancaria");
-        System.out.println("    3) Acceder a una cuenta bancaria existente");
-        System.out.println("    4) Ver datos");
+        System.out.println("    3) Hacer operaciones bancarias");
+        System.out.println("    4) Ver datos o transacciones");
         System.out.println("    0) Cerrar sesion");
 
         System.out.print("Introduzca tu opcion: ");
@@ -153,7 +153,7 @@ public class UPMBank {
         // Agrega los datos del nuevo cliente a la variable datos
 
         datos += "Nombre: " + nombre + "\n" + "Apellidos: " + apellidos + "\n" + "Fecha de nacimiento: " + diaString + "/" + mesString + "/" + year + "\n" + "DNI: " + dni
-                + "\n" + "Correo: " + correo + "\n";
+                + letradni + "\n" + "Correo: " + correo + "\n";
 
         usuario = true;
         menu();
@@ -506,24 +506,24 @@ public class UPMBank {
         }else {
             System.out.println("Introduzca el numero de cuenta al que quieres hacer una tranferencia: ");
             do {
-                System.out.println("Introduzca el CE(4 digitos) de tu universidad: ");
+                System.out.print("Introduzca el CE(4 digitos) de tu universidad: \n");
                 cetranferencia = scan.nextInt();
             } while (cetranferencia < 0 || cetranferencia > 9999);
             do {
-                System.out.println("Introduzca el CS(4 digitos) de tu campus: ");
+                System.out.print("Introduzca el CS(4 digitos) de tu campus: \n");
                 cstranferencia = scan.nextInt();
             } while (cstranferencia < 0 || cstranferencia > 9999);
             do {
-                System.out.println("Introduzca el DC(2 digitos): ");
+                System.out.print("Introduzca el DC(2 digitos): \n");
                 dctranferencia = scan.nextInt();
             } while (dctranferencia < 0 || dctranferencia > 99);
             do {
-                System.out.println("Introduzca el NC(10 digitos) de tu universidad");
+                System.out.print("Introduzca el NC(10 digitos): \n");
                 nctranferencia = scan.nextLong();
             } while (cstranferencia < 0 || cstranferencia > 99999999999L);
 
 
-            System.out.printf("Cuenta: %2d %2d %2d %2d", cetranferencia, cstranferencia, dctranferencia, nctranferencia);
+            System.out.printf("Haciendo tranferencia a la cuenta: %2d %2d %2d %2d", cetranferencia, cstranferencia, dctranferencia, nctranferencia);
 
             System.out.println("\nSe ha realizado correctamente la tranferencia");
             saldo -= tranferir;
@@ -531,7 +531,7 @@ public class UPMBank {
 
             // Se añadira a la variable transacciones la transferencia realizada
 
-            transacciones += "- [" + tranferir + "€]" + ", a [" + cetranferencia + cstranferencia + dctranferencia + nctranferencia + "[" + saldo + "]\n";
+            transacciones += "- [" + tranferir + "€]" + ", a [" + cetranferencia + cstranferencia + dctranferencia + nctranferencia + "]" + "Tu saldo restante es [" + saldo + "]\n";
         }
 
         bancariaCreada();
