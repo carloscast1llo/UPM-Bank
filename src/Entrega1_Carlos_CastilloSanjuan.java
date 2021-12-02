@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Entrega1_Carlos_CastilloSanjuan {
@@ -15,25 +14,11 @@ public class Entrega1_Carlos_CastilloSanjuan {
 
 
     public static void main(String[] args) {
-
-        /*
-            INICIO DEL PROGRAMA
-
-        En esta funcion se encarga de llamar a la funcion menu, para que pueda empezar el programa
-         */
-
         menu();
     }
 
     public static void menu() {
         Scanner scan = new Scanner(System.in);
-
-        /*
-            CREACION Y VALIDACION DEL MENU
-
-        En esta funcion consiste en la distribucion de todas las funciones, es como bien dice el nombre es el
-        menu principal, dependiendo del numero que introduzcas.
-         */
 
         System.out.println("\n" +
                 "██╗░░░██╗██████╗░███╗░░░███╗╚═════╝░██████╗░░█████╗░███╗░░██╗██╗░░██╗\n" +
@@ -82,53 +67,33 @@ public class Entrega1_Carlos_CastilloSanjuan {
 
     public static void nuevoCliente() {
 
-        /*
-            CREACION DEL NUEVO CLIENTE
-
-        En esta funcion consiste en la creacion del usuario del cliente, en ella contiene toda las peticiones
-        necesarias para la creacion del usuario con sus respectivas validaciones. Para poder hacer cualquier otra opcion
-        deben pasar por la creacion del usuario.
-         */
-
-        // Nombre
-
         Scanner scan = new Scanner(System.in);
         System.out.print("Introduce el nombre del cliente: ");
         nombre = scan.nextLine();
 
-        // Apellidos
-
         System.out.print("Introduce los apellidos del cliente: ");
         apellidos = scan.nextLine();
-
-        // Fecha de nacimiento
 
         System.out.println("Introduce la fecha de nacimiento");
         System.out.print("DIA (DD): ");
         dia = scan.nextInt();
-        if (Integer.toString(dia).length() == 1) {          // Comprobacion si solo tiene 1 caracter añadirle 0 delante
+        if (Integer.toString(dia).length() == 1) {
             diaString = "0" + dia;
         }
         System.out.print("MES (MM): ");
         mes = scan.nextInt();
-        if (Integer.toString(mes).length() == 1) {          // Comprobacion si solo tiene 1 caracter añadirle 0 delante
+        if (Integer.toString(mes).length() == 1) {
             mesString = "0" + mes;
         }
         System.out.print("AÑO (AAAA): ");
         year = scan.nextInt();
 
-        // Comprobacion fecha de nacimiento
-
         if (validacionFecha(dia, mes, year)) {
             System.out.println("La fecha de nacimiento es: " + diaString + "/" + mesString + "/" + year);
         }
 
-        // DNI
-
         System.out.print("Introduce el DNI del cliente (solo numeros): ");
         dni = scan.next();
-
-        // Comprobacion DNI
 
         validacionDNI();
 
@@ -137,20 +102,14 @@ public class Entrega1_Carlos_CastilloSanjuan {
         letradni = Character.toUpperCase(letradni);
         System.out.println("Tu DNI es: " + dni + letradni);
 
-        // Correo electronico y su valoracion
-
         System.out.print("Introduce la direccion de correo UPM del cliente: ");
         correo = scan.next();
 
         validacionCorreo();
 
-        // Confirmacion de la creacion de la cuenta
-
         System.out.println("-----------------------------------------------");
         System.out.println("** Enhorabuena!!, ya eres cliente de UPMBank **");
         System.out.println("-----------------------------------------------");
-
-        // Agrega los datos del nuevo cliente a la variable datos
 
         datos += "Nombre: " + nombre + "\n" + "Apellidos: " + apellidos + "\n" + "Fecha de nacimiento: " + diaString + "/" + mesString + "/" + year + "\n" + "DNI: " + dni
                 + letradni + "\n" + "Correo: " + correo + "\n";
@@ -160,12 +119,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
     }
 
     public static boolean validacionFecha(int dia, int mes, int year) {
-
-        /*
-            VALIDACION DE LA FECHA DE NACIMIENTO
-
-        En esta funcion consiste en la comprabacion de la fecha de nacimiento, en el que devolvera un valor booleano.
-         */
 
         Scanner scan = new Scanner(System.in);
 
@@ -192,12 +145,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
 
     public static boolean validacionCorreo() {
 
-        /*
-            VALIDACION DEL CORREO ELECTRONICO
-
-        En esta funcion consiste en la comprabacion del correo electronico, que devolvera un valor booleano.
-         */
-
         Scanner scan = new Scanner(System.in);
 
         while (!correo.contains("@alumnos.upm.es") && !correo.contains("@upm.es")) {
@@ -209,12 +156,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
     }
 
     public static boolean validacionDNI() {
-
-        /*
-            VALIDACION DEL DNI
-
-        En esta funcion consiste en la comprabacion del DNI, que devolvera un valor booleano.
-         */
 
         Scanner scan = new Scanner(System.in);
 
@@ -230,17 +171,8 @@ public class Entrega1_Carlos_CastilloSanjuan {
 
     public static void cuentabancaria() {
 
-        /*
-            CREACION DE LA CUENTA BANCARIA DEL CLIENTE
-
-        En esta funcion consiste en la creacion de una cuenta bancaria, consiste en un pequeño menu para seleccionar
-        el tipo de cuenta y luego la generacion del numero de cuenta, en la que contiene una variable booleana true,
-        que sirve para poder realizar alguna de las otras opciones.
-         */
-
         Scanner scan = new Scanner(System.in);
 
-        // Nombre y apellidos del cliente
         if (usuario == false) {
             System.out.println("** Debes dar de alta a un cliente **");
             menu();
@@ -250,8 +182,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
             nombre = scan.nextLine();
             System.out.print("Introduce los apellidos del cliente: ");
             nombre = scan.nextLine();
-
-            // Tipos de cuentas
 
             System.out.print("Elige el tipo de cuenta: \n\t1) Corriente\n\t2) Ahorro \n\t3) Remunerada\n");
             System.out.print("Introduzca tu opcion: ");
@@ -270,8 +200,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
                     break;
             }
 
-            // Numero de cuenta final
-
             System.out.printf("Tu numero de cuenta bancaria nuevo es: %2d 0%2d %2d %2d\n", FIJOCE, FIJOCS, creacionDC(), creacionNC());
 
             System.out.println("El saldo actual de la cuenta es: 0€");
@@ -282,15 +210,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
     }
 
     public static int creacionDC() {
-
-        /*
-            GENERADOR DEL DIGITO DE CONTROL (DC)
-
-        En esta funcion consiste en la creacion de el digito de control, que se divide en c1, c2, en el que te devuelve
-        una variable de tipo int.
-         */
-
-        // Generador DC (C1)
 
         int b4 = 1, b3 = 0, b2 = 2, b1 = 0, a4 = 0, a3 = 1, a2 = 0, a1 = 9, c1 = 0, c2 = 0;
 
@@ -309,8 +228,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
         }
 
         String numc1 = String.valueOf(c1);
-
-        // Generador DC (C2)
 
         int r2 = (d1 + 2 * d2 + 4 * d3 + 8 * d4 + 5 * d5 + 10 * d6 + 9 * d7 + 7 * d8 + 3 * d9 + 6 * d10) % 11;
         int resultado2 = 11 - r2;
@@ -335,16 +252,7 @@ public class Entrega1_Carlos_CastilloSanjuan {
         return numDC;
     }
 
-    public static long creacionNC() {  // DUDAS Y MAS DUDAS
-
-        /*
-            CREACION DEL NUMERO DE CUENTA
-
-        En esta funcion consiste en la creacion del digito del numero de cuenta, en el que la funcion te devuelve
-        una variable de tipo long.
-         */
-
-        // Generacion de 10 numeros aleatorios
+    public static long creacionNC() {
 
         d1 = (int) Math.floor(Math.random() * (10));
         d2 = (int) Math.floor(Math.random() * (10));
@@ -378,16 +286,7 @@ public class Entrega1_Carlos_CastilloSanjuan {
         return ncf;
     }
 
-
     public static void bancariaCreada() {
-
-        /*
-            MENU OPCIONES CON UNA CUENTA BANCARIA
-
-        En esta funcion consiste en el menu que se podra acceder una vez creada la cuenta bancaria y dado de alta el
-        usuario, en esta funcion se encuentra los apartados de ingresar, extraer, transferencias y prestamos
-        hipotecarios.
-         */
 
         Scanner scan = new Scanner(System.in);
 
@@ -427,13 +326,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
 
     public static void menuIngreso() {
 
-        /*
-            MENU INGRESO
-
-        En esta funcion consiste en menu, que esta dentro de la funcion bancaria creada, en la que el usuario podra
-        realizar ingresos a la cuenta.
-         */
-
         Scanner scan = new Scanner(System.in);
 
         float depositar;
@@ -444,22 +336,12 @@ public class Entrega1_Carlos_CastilloSanjuan {
         saldo += depositar;
         System.out.println("El saldo de su cuenta es de: " + saldo + "€");
 
-        // Se añadira a la variable transacciones el ingreso realizado
-
         transacciones += "+ [" + depositar + "€]" + "\tTu saldo restante es " + "[" + saldo + "]\n";
 
         bancariaCreada();
     }
 
     public static void menuExtracion() {
-
-        /*
-            MENU EXTRACCION
-
-        En esta funcion consiste en menu, que esta dentro de la funcion bancaria creada, en la que el usuario podra
-        realizar extraciones de la cuenta, pero tiene una condicion debe tener dinero suficiente en el saldo para poder
-        realizar cualquier extraccion.
-         */
 
         Scanner scan = new Scanner(System.in);
 
@@ -475,22 +357,12 @@ public class Entrega1_Carlos_CastilloSanjuan {
             System.out.println("El saldo de su cuenta es de: " + saldo + "€");
         }
 
-        // Se añadira a la variable transacciones la extraccion realizada
-
         transacciones += "- [" + extraer + "€]" + "\tTu saldo restante es " + "[" + saldo + "]\n";
 
         bancariaCreada();
     }
 
     public static void menuTranferencia() {
-
-        /*
-            MENU TRANFERENCIA
-
-        En esta funcion consiste en menu, que esta dentro de la funcion bancaria creada, en la que el usuario podra
-        realizar transferencias de la cuenta, pero tiene una condicion debe tener dinero suficiente en el saldo para poder
-        realizar cualquier transferencia.
-         */
 
         Scanner scan = new Scanner(System.in);
 
@@ -529,8 +401,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
             saldo -= tranferir;
             System.out.println("El saldo de su cuenta es de: " + saldo + "€");
 
-            // Se añadira a la variable transacciones la transferencia realizada
-
             transacciones += "- [" + tranferir + "€]" + ", a [" + cetranferencia + cstranferencia + dctranferencia + nctranferencia + "]" + "Tu saldo restante es [" + saldo + "]\n";
         }
 
@@ -538,13 +408,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
     }
 
     public static void menuPrestamoHipotecario() {
-
-        /*
-            MENU PRESTAMOS HIPOTECARIOS
-
-        En esta funcion consiste en menu, que esta dentro de la funcion bancaria creada, en la que el usuario podra
-        realizar prestamos hipotecarios a la cuenta.
-         */
 
         Scanner scan = new Scanner(System.in);
 
@@ -556,36 +419,30 @@ public class Entrega1_Carlos_CastilloSanjuan {
 
         do{
             System.out.print("Introduzca el interes anual (en tanto por ciento): ");
-            interes = scan.nextInt();
+            interes = scan.nextLong();
         }while(interes < 0 || interes > 100);
 
         interes = interes / 100f;
         double imes = interes / 12;
 
-        // Years
-
         System.out.print("Introduzca el numero de años: ");
         int yearsh = scan.nextInt();
         int meses = yearsh * 12;
 
-        // Calculo cuota
-
         double cuota = capital * imes * (Math.pow((1 + imes), meses) / (Math.pow((1 + imes), meses) - 1));
         System.out.println("Mensualidad\t\tCuota\t\tInteres\t\tAbonado\t\tRestante");
-        System.out.printf(Locale.US, "\t%d\t\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f%n", 0, 0f, 0f, 0f, capital);
+        System.out.printf("\t%d\t\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f%n", 0, 0f, 0f, 0f, capital);
         int i = 1;
         double cv = capital;
         do {
             double ia = cv * imes;
             double ca = cuota - ia;
             cv -= ca;
-            System.out.printf(Locale.US, "\t%d\t\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f%n", i, cuota, ia, ca, cv);
+            System.out.printf("\t%d\t\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f%n", i, cuota, ia, ca, cv);
             i++;
         } while (i != meses + 1);
 
         saldo += capital;
-
-        // Se añadira a la variable transacciones la transferencia realizada
 
         transacciones += "Capital + [" + capital + "€]" + ", con interes de [" + interes + "] en [" + yearsh + "]\tTu saldo restante es " + "[" + saldo + "]\n";
 
@@ -595,14 +452,6 @@ public class Entrega1_Carlos_CastilloSanjuan {
 
 
     public static void menuTransacciones() {
-
-        /*
-            MENU DE DATOS Y TRANSACCIONES
-
-        En esta funcion consiste en el menu que se podra acceder una vez creada la cuenta bancaria y dado de alta el
-        usuario, en esta funcion se encuentra los datos del cliente dado de alto y las transacciones del cliente, en
-        el switch imprime las variables estaticas que han sido modificadas añadiendo los datos y transacciones.
-         */
 
         Scanner scan = new Scanner(System.in);
 
