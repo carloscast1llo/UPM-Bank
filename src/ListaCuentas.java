@@ -1,13 +1,13 @@
 public class ListaCuentas {
 
-    private int numCuentas = 0;
-    private int numClientes = 0;
-    private final int MAX_CUENTAS = 200;
-    private final int MAX_CLIENTES = 20;
+    private int numCuentas;
+    private final int MAX_CUENTAS;
     private final Cuenta [] listaCuentas;
 
-    public ListaCuentas(Cuenta[] listaCuentas) {
-        this.listaCuentas = listaCuentas;
+    public ListaCuentas(int max) {
+        MAX_CUENTAS = max;
+        this.listaCuentas = new Cuenta[MAX_CUENTAS];
+        numCuentas = 0;
     }
 
     public Cuenta getCuenta(String iban){
@@ -24,12 +24,18 @@ public class ListaCuentas {
         return cuent;
     }
 
+    public void añadirCuenta(Cuenta cuenta){
+        if(numCuentas >= MAX_CUENTAS){
+            System.out.println("No se pueden añadir mas cuentas");
+        }else{
+            this.listaCuentas[numCuentas] = cuenta;
+            numCuentas++;
+        }
+    }
 
+    public void imprimir(){
 
-
-
-
-
+    }
 
 
 }
