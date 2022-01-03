@@ -4,6 +4,10 @@ public class ListaCuentas {
     private final int MAX_CUENTAS;
     private final Cuenta [] listaCuentas;
 
+    public int getNumCuentas() {
+        return numCuentas;
+    }
+
     public ListaCuentas(int max) {
         MAX_CUENTAS = max;
         this.listaCuentas = new Cuenta[MAX_CUENTAS];
@@ -24,6 +28,10 @@ public class ListaCuentas {
         return cuent;
     }
 
+    public Cuenta getCuentaPosicion(int pos){
+        return listaCuentas[pos];
+    }
+
     public void añadirCuenta(Cuenta cuenta){
         if(numCuentas >= MAX_CUENTAS){
             System.out.println("No se pueden añadir mas cuentas");
@@ -33,9 +41,10 @@ public class ListaCuentas {
         }
     }
 
-    public void imprimir(){
-
+    public void imprimirTodosCuentas(){
+        for(int i = 0; i < numCuentas; i++){
+            listaCuentas[i].imprimirCuenta();
+        }
     }
-
 
 }

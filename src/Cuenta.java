@@ -7,20 +7,19 @@ public class Cuenta {
     private double saldoCuenta;
     private String iban;
     TipoCuenta.tipoCuenta tipoCuenta;
-    Cliente titular;
     ListaMovimientos movimiento;
     ListaPrestamos prestamos;
     ListaTransferencias transferenciasEmitidas;
     ListaTransferencias transferenciasRecibidas;
 
 
-    public Cuenta(int codigoSucursal, int digitoControl, int numeroCuenta, double saldoCuenta, String iban) {
+    public Cuenta(int codigoSucursal, int digitoControl, long numeroCuenta, String iban,TipoCuenta.tipoCuenta tipoCuenta) {
         this.codigoSucursal = codigoSucursal;
         this.digitoControl = digitoControl;
         this.numeroCuenta = numeroCuenta;
         this.iban = iban;
-        this.saldoCuenta = saldoCuenta;
         this.movimiento = new ListaMovimientos();
+        this.tipoCuenta = tipoCuenta;
     }
 
     public int getCodigoSucursal() {
@@ -169,4 +168,7 @@ public class Cuenta {
         return iban;
     }
 
+    public void imprimirCuenta(){
+        System.out.println("\t"+tipoCuenta + " -- " + iban);
+    }
 }

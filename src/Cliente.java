@@ -13,6 +13,7 @@ public class Cliente {
         this.correoElectronico = correoElectronico;
         this.dni = dni;
         this.cuentas = new ListaCuentas(10);
+        this.diaNacimiento = fecha;
     }
 
     public String getNombre() {
@@ -29,6 +30,18 @@ public class Cliente {
     }
     public ListaCuentas getCuentas() {
         return cuentas;
+    }
+    public Fecha getDiaNacimiento() {
+        return diaNacimiento;
+    }
+
+    public int getCS(){
+        int cs = 0;
+
+        if(cuentas.getNumCuentas() > 0) {
+            cs = cuentas.getCuentaPosicion(0).getCodigoSucursal();
+        }
+        return cs;
     }
 
     public static boolean validacionNombre(String nombre){
@@ -56,15 +69,16 @@ public class Cliente {
         return correcto;
     }
 
-    public void imprimir(Cliente cliente) {
+    public void imprimirCliente(){
 
-        System.out.println("Nombre: " + cliente.getNombre());
-        System.out.println("Apellidos: " + cliente.getApellidos());
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Apellidos: " + apellidos);
         System.out.print("Fecha de nacimiento: ");
         diaNacimiento.imprimir();
-        System.out.println("\nDNI: " + cliente.getDni());
-        System.out.println("Correo Electronico: " + cliente.getCorreoElectronico());
-        System.out.println("Cuentas: "+ cliente.getCuentas() + "\n"); //Mirar println si queda bien
+        System.out.println("\nDNI: " + dni);
+        System.out.println("Correo Electronico: " + correoElectronico);
+        System.out.print("Cuentas: "+"\n");
+        cuentas.imprimirTodosCuentas();
 
     }
 
