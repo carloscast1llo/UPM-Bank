@@ -35,15 +35,6 @@ public class Cliente {
         return diaNacimiento;
     }
 
-    public int getCS(){
-        int cs = 0;
-
-        if(cuentas.getNumCuentas() > 0) {
-            cs = cuentas.getCuentaPosicion(0).getCodigoSucursal();
-        }
-        return cs;
-    }
-
     public static boolean validacionNombre(String nombre){
 
         return (nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5") || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9"));
@@ -54,7 +45,7 @@ public class Cliente {
     }
     public static boolean validacionCorreo(String correo) {
 
-        return (correo.contains("@upm.es") || correo.contains("@alumnos.upm.es"));
+        return (correo.contains("@upm.es") || correo.contains("@alumnos.upm.es") || correo.contains("@UPM.ES") || correo.contains("@ALUMNOS.UPM.ES"));
     }
     public static boolean validacionDNI(int dniNum, char dniLet) {
 
@@ -77,8 +68,9 @@ public class Cliente {
         diaNacimiento.imprimir();
         System.out.println("\nDNI: " + dni);
         System.out.println("Correo Electronico: " + correoElectronico);
-        System.out.print("Cuentas: "+"\n");
+        System.out.print("Cuentas: \n");
         cuentas.imprimirTodosCuentas();
+        System.out.println();
 
     }
 

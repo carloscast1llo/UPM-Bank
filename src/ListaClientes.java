@@ -33,7 +33,7 @@ public class ListaClientes {
     public void imprimirTodosClientes(){
 
         for(int i = 0; i < numClientes; i++){
-            System.out.println("\t["+(i + 1)+"]");
+            System.out.println("["+(i + 1)+"]");
             clientes[i].imprimirCliente();
         }
     }

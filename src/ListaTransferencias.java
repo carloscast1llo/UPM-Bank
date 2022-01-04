@@ -20,14 +20,14 @@ public class ListaTransferencias {
     public void imprimirTransferenciaEmitidas(){
         for (int i = 0; i < numTransferencias; i++) {
             System.out.print("");
-            //transferencias[i].imprimirTransferenciaEmitida();
+            transferencias[i].imprimirTransferenciaEmitida();
         }
     }
 
     public void imprimirTransferenciaRecibidas(){
         for (int i = 0; i < numTransferencias; i++) {
             System.out.print("");
-            //transferencias[i].imprimirTransferenciaRecibida();
+            transferencias[i].imprimirTransferenciaRecibida();
         }
     }
 }

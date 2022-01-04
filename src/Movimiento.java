@@ -1,5 +1,3 @@
-import javax.xml.transform.TransformerFactory;
-
 public class Movimiento {
     private final double importe;
     private final Movimiento.TipoMovimiento tipoMovimiento;
@@ -12,15 +10,17 @@ public class Movimiento {
     public double getImporte() {
         return this.importe;
     }
-
     public Movimiento.TipoMovimiento getTipoMovimiento() {
         return this.tipoMovimiento;
     }
 
     enum TipoMovimiento {
         Deposito,
-        Extraccion,
-        Transferencia;
+        Extraccion;
+    }
 
+    public void imprimirMovimiento() {
+        System.out.println("Tipo de movimiento: " + tipoMovimiento);
+        System.out.println("Importe: " + importe);
     }
 }

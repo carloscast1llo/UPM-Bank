@@ -8,17 +8,21 @@ public class ListaCuentas {
         return numCuentas;
     }
 
+    public Cuenta[] getListaCuentas() {
+        return listaCuentas;
+    }
+
     public ListaCuentas(int max) {
         MAX_CUENTAS = max;
         this.listaCuentas = new Cuenta[MAX_CUENTAS];
         numCuentas = 0;
     }
 
-    public Cuenta getCuenta(String iban){
+    public Cuenta buscarCuenta(String iban){
         int i = 0;
         Cuenta cuent = null;
 
-        while(i < listaCuentas.length && i < numCuentas){
+        while(i < numCuentas){
             if(listaCuentas[i].getIban().equals(iban)){
                 cuent = listaCuentas[i];
             }
@@ -28,7 +32,7 @@ public class ListaCuentas {
         return cuent;
     }
 
-    public Cuenta getCuentaPosicion(int pos){
+    public Cuenta buscarCuentaPosicion(int pos){
         return listaCuentas[pos];
     }
 
@@ -46,5 +50,7 @@ public class ListaCuentas {
             listaCuentas[i].imprimirCuenta();
         }
     }
+
+
 
 }
