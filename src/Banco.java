@@ -18,6 +18,7 @@ public class Banco {
         menuPrincipal();
     }
 
+
     public static void menuPrincipal() {
         Scanner scan = new Scanner(System.in);
 
@@ -56,20 +57,23 @@ public class Banco {
                 menuPrincipal();
                 break;
             case 3:
-                menuMovimiento(cuenta); // Mirar esto
+                menuTransacciones(cuenta); // Mirar esto a ver si no hace falta pasarle esa "cuenta"
                 menuPrincipal();
                 break;
             case 4:
-                menuImprimirMovimientos();
+                menuImprimirTransacciones();
+                menuPrincipal();
                 break;
             case 5:
                 menuImprimirCliente();
+                menuPrincipal();
                 break;
             default:
                 System.out.print("***Caracter invalido***");
                 menuPrincipal();
         }
     }
+
 
     public static void crearCliente() {
 
@@ -82,12 +86,12 @@ public class Banco {
         do {
             System.out.print("Introduce el nombre: ");
             nombre1 = scan.next();
-        } while (cliente.validacionNombre(nombre1));
+        } while (!cliente.validacionNombre(nombre1));
 
         do {
             System.out.print("Introduce los apellidos: ");
             apellidos1 = scan.next();
-        } while (cliente.validacionApellidos(apellidos1));
+        } while (!cliente.validacionApellidos(apellidos1));
 
         do {
             System.out.println("Introduce la fecha de nacimiento");
@@ -109,7 +113,7 @@ public class Banco {
         do {
             System.out.print("Introduce el correo: ");
             correoElectronico1 = scan.next();
-        } while (!cliente.validacionCorreo(correoElectronico1));
+        } while (!cliente.validacionCorreo(correoElectronico1) || !cliente.validacionCorreoRepetido(correoElectronico1, listClientes));
 
         do {
             do {
@@ -121,7 +125,7 @@ public class Banco {
             dniLet = scan.next().charAt(0);
             dniLet = Character.toUpperCase(dniLet);
             dni1 = String.valueOf(dniNum) + dniLet;
-        } while (!cliente.validacionDNI(dniNum, dniLet));
+        } while (!cliente.validacionDNI(dniNum, dniLet) || !cliente.validacionDniRepetido(dni1, listClientes));
 
         System.out.println(dni1);
 
@@ -132,6 +136,7 @@ public class Banco {
         cliente = new Cliente(nombre1, apellidos1, fecha, correoElectronico1, dni1);
         listClientes.addCliente(cliente);
     }
+
 
     public static void crearCuentaBancaria(int codigoSucursal) {
 
@@ -156,8 +161,6 @@ public class Banco {
             } else {
 
                 System.out.println("***Enhorabuna, hemos encontrado tus datos***");
-                System.out.print("Elige el tipo de cuenta: \n\t1) Corriente\n\t2) Ahorro \n\t3) Remunerada\n");
-                System.out.print("Introduzca tu opcion: ");
 
                 TipoCuenta.tipoCuenta tipoCuenta = menuTipoCuenta();
 
@@ -169,7 +172,7 @@ public class Banco {
                 System.out.println("El saldo actual de la cuenta es: 0€");
 
                 cuenta = new Cuenta(codigoSucursal, digitoControl, numeroCuenta, iban, tipoCuenta);
-                clienteCuenta.getCuentas().añadirCuenta(cuenta);
+                clienteCuenta.getCuentas().addCuenta(cuenta);
             }
         }
 
@@ -180,6 +183,9 @@ public class Banco {
 
         TipoCuenta.tipoCuenta tiposCuenta = null;
 
+        System.out.print("Elige el tipo de cuenta: \n\t1) Corriente\n\t2) Ahorro \n\t3) Remunerada\n");
+
+        System.out.print("Introduzca tu opcion: ");
         int selectOption2 = scan.nextInt();
 
         switch (selectOption2) {
@@ -210,7 +216,7 @@ public class Banco {
 
         do {
             leerFicheroTXT();
-            System.out.print("Introduce donde estas: ");
+            System.out.print("\nIntroduce donde estas: ");
             selectOption3 = scan.nextLine();
 
             if (selectOption3.equals("Campus Sur")) {
@@ -231,7 +237,8 @@ public class Banco {
         return codigoSucursal;
     }
 
-    public static void menuMovimiento(Cuenta busquedaCuenta) {
+
+    public static void menuTransacciones(Cuenta busquedaCuenta) {
         Scanner scan = new Scanner(System.in);
 
         if (cliente == null || cuenta == null) {
@@ -249,15 +256,15 @@ public class Banco {
             switch (selectOption4) {
                 case 1:
                     menuBusquedaMovimiento();
-                    menuMovimiento(busquedaCuenta);
+                    menuTransacciones(busquedaCuenta);
                     break;
                 case 2:
                     menuTransferencia();
-                    menuMovimiento(busquedaCuenta);
+                    menuTransacciones(busquedaCuenta);
                     break;
                 case 3:
-                    //menuPrestamo();
-                    menuMovimiento(busquedaCuenta);
+                    menuPrestamo();
+                    menuTransacciones(busquedaCuenta);
                     break;
                 case 0:
                     System.out.println("Has elegido: Salir");
@@ -265,11 +272,12 @@ public class Banco {
                     break;
                 default:
                     System.out.print("Caracter invalido");
-                    menuMovimiento(busquedaCuenta);
+                    menuTransacciones(busquedaCuenta);
             }
        }
 
     }
+
 
     public static void menuIngresoExtraccion(Cuenta busquedaCuenta) {
         Scanner scan = new Scanner(System.in);
@@ -289,18 +297,18 @@ public class Banco {
             case 1:
                 movimientoTipo = Movimiento.TipoMovimiento.Deposito;
                 movimiento = menuDeposito(busquedaCuenta, movimientoTipo);
-                busquedaCuenta.getMovimiento().añadirMovimiento(movimiento);
-                menuMovimiento(busquedaCuenta);
+                busquedaCuenta.getMovimiento().addMovimiento(movimiento);
+                menuTransacciones(busquedaCuenta);
                 break;
             case 2:
                 movimientoTipo = Movimiento.TipoMovimiento.Extraccion;
                 movimiento = menuExtraccion(busquedaCuenta, movimientoTipo);
-                busquedaCuenta.getMovimiento().añadirMovimiento(movimiento);
-                menuMovimiento(busquedaCuenta);
+                busquedaCuenta.getMovimiento().addMovimiento(movimiento);
+                menuTransacciones(busquedaCuenta);
                 break;
             case 0:
                 System.out.println("Has elegido: Salir");
-                menuMovimiento(busquedaCuenta);
+                menuTransacciones(busquedaCuenta);
                 break;
             default:
                 System.out.print("Caracter invalido");
@@ -323,6 +331,7 @@ public class Banco {
             System.out.println("***El cliente no existe***");
             menuBusquedaMovimiento();
         }else{
+            busquedaCliente.imprimirCuentaCliente();
             System.out.print("Introduce el IBAN de la cuenta: ");
             iban = scan.next();
             busquedaCuenta = busquedaCliente.getCuentas().buscarCuenta(iban);
@@ -369,6 +378,8 @@ public class Banco {
             importe = scan.nextDouble();
             if (importe < 0) {
                 System.out.println("El importe no puede ser negativo o menor al saldo de la cuenta");
+            }else if(importe > busquedaCuenta.getSaldo()){
+                System.out.println("El importe no puede ser mayor al saldo de la cuenta");
             }
         } while (importe < 0 || importe > busquedaCuenta.getSaldo());
 
@@ -377,6 +388,7 @@ public class Banco {
         System.out.println("Se ha realizado la extraccion con exito");
         return new Movimiento(movimientoTipo, importe);
     }
+
 
     public static void menuTransferencia() {
         Scanner scan = new Scanner(System.in);
@@ -421,17 +433,20 @@ public class Banco {
         Scanner scan = new Scanner(System.in);
         Cliente clienteEmisor;
         Cuenta cuentaEmisor = null;
-        System.out.println("Introduce el DNI de cuenta emisor: ");
+        System.out.print("Introduce el DNI de cuenta emisor: ");
         String dniEmisor = scan.nextLine();
         if(listClientes.buscarCliente(dniEmisor) == null){
             System.out.println("No se ha encontrado el cliente");
             menuTransferencia();
         }else{
             clienteEmisor = listClientes.buscarCliente(dniEmisor);
+            clienteEmisor.imprimirCuentaCliente();
             System.out.print("Introduce el numero de cuenta emisor: ");
             String numeroCuentaEmisor = scan.next();
             cuentaEmisor = clienteEmisor.getCuentas().buscarCuenta(numeroCuentaEmisor);
         }
+
+        System.out.println("***Datos del emisor encontrado con exito***");
 
         return cuentaEmisor;
     }
@@ -440,26 +455,94 @@ public class Banco {
         Scanner scan = new Scanner(System.in);
         Cliente clienteReceptor;
         Cuenta cuentaReceptor = null;
-        System.out.println("Introduce el DNI de cuenta receptor: ");
+        System.out.print("Introduce el DNI de cuenta receptor: ");
         String dniReceptor = scan.nextLine();
         if(listClientes.buscarCliente(dniReceptor) == null){
             System.out.println("No se ha encontrado el cliente");
             menuTransferencia();
         }else{
             clienteReceptor = listClientes.buscarCliente(dniReceptor);
+            clienteReceptor.imprimirCuentaCliente();
             System.out.print("Introduce el numero de cuenta receptor: ");
             String numeroCuentaEmisor = scan.next();
             cuentaReceptor = clienteReceptor.getCuentas().buscarCuenta(numeroCuentaEmisor);
         }
 
+        System.out.println("***Datos del receptor encontrado con exito***");
+
         return cuentaReceptor;
     }
 
-    public static Prestamo menuPrestamo(){
 
+    public static void menuPrestamo(){ // FALTA ESTO
 
-        return null;
+        Scanner scan = new Scanner(System.in);
+        double capital, interesAnual;
+        int numeroAnios, numeroMeses;
+        Cuenta busquedaCuentaPrestamo;
+        Prestamo prestamo = null;
+
+        busquedaCuentaPrestamo = buscarCuentaPrestamo();
+        if(busquedaCuentaPrestamo == null){
+            System.out.println("No se ha encontrado la cuenta");
+        }else if(busquedaCuentaPrestamo.getPrestamos().getNumPrestamos() >= busquedaCuentaPrestamo.getPrestamos().getMAX_PRESTAMOS()){
+            System.out.println("***Ha alcanzado el numero maximos de movimientos***");
+            menuTransacciones(busquedaCuentaPrestamo);
+        }else{
+            System.out.print("Introduzca el capital solicitado: ");
+            capital = scan.nextDouble();
+            System.out.print("Introduzca el numero de años: ");
+            numeroAnios = scan.nextInt();
+            numeroMeses = numeroAnios * 12;
+            System.out.print("Introduzca el interes anual (en tanto por ciento): ");
+            interesAnual = scan.nextDouble();
+            interesAnual = interesAnual / 100f;
+            double imes = interesAnual / 12;
+
+            prestamo = new Prestamo(capital, numeroMeses, imes);
+            busquedaCuentaPrestamo.getPrestamos().addPrestamo(prestamo);
+            tablaAmortizaciones(prestamo, numeroMeses, imes);
+        }
     }
+
+    public static Cuenta buscarCuentaPrestamo(){
+        Scanner scan = new Scanner(System.in);
+        Cliente clientePrestamo;
+        Cuenta cuentaPrestamo = null;
+        System.out.print("Introduce el DNI: ");
+        String dniPrestamo = scan.nextLine();
+        if(listClientes.buscarCliente(dniPrestamo) == null){
+            System.out.println("No se ha encontrado el cliente");
+            menuTransferencia();
+        }else{
+            clientePrestamo = listClientes.buscarCliente(dniPrestamo);
+            clientePrestamo.imprimirCuentaCliente();
+            System.out.print("Introduce el numero de cuenta para realizar prestamo: ");
+            String numeroCuentaEmisor = scan.next();
+            cuentaPrestamo = clientePrestamo.getCuentas().buscarCuenta(numeroCuentaEmisor);
+        }
+
+        return cuentaPrestamo;
+    }
+
+    public static void tablaAmortizaciones(Prestamo prestamo, int numeroMeses, double imes){
+        int i = 0;
+        double cuota, ia, ca, cv = prestamo.getCapital();
+
+        cuota = prestamo.getCapital() * imes * (Math.pow((1 + imes), numeroMeses) / (Math.pow((1 + imes), numeroMeses) - 1));
+        System.out.println("Mensualidad\t\tCuota\t\tInteres\t\tAbonado\t\tRestante");
+        System.out.printf("\t%d\t\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f%n", 0, 0f, 0f, 0f, cv);
+        i++;
+        for(int j = 1; j<= numeroMeses; j++){
+            ia = cv * imes;
+            ca = cuota - ia;
+            cv -= ca;
+            System.out.printf("\t%d\t\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f%n", i, cuota, ia, ca, cv);
+            i++;
+        }
+
+    }
+
 
     public static void menuImprimirCliente() {
 
@@ -468,86 +551,136 @@ public class Banco {
         Scanner scan = new Scanner(System.in);
         String dni2 = "", iban2 = "";
 
-        System.out.println("¿Que datos quieres ver?");
-        System.out.println("\t1) Datos de un cliente");
-        System.out.println("\t2) Todos los datos de los clientes del banco");
-        System.out.println("\t0) Salir");
-        System.out.print("Introduzca tu opcion: ");
-        int opcion = scan.nextInt();
+        if(cliente == null){
+            System.out.println("***Debes darse de alta primero***");
+        }else{
+            System.out.println("¿Que datos quieres ver?");
+            System.out.println("\t1) Datos de un cliente");
+            System.out.println("\t2) Todos los datos de los clientes del banco");
+            System.out.println("\t0) Salir");
+            System.out.print("Introduzca tu opcion: ");
+            int opcion = scan.nextInt();
 
-        switch (opcion) {
-            case 1:
-                System.out.print("Introduce el DNI (Para encontrar el cliente): ");
-                dni2 = scan.next();
+            switch (opcion) {
+                case 1:
+                    System.out.print("Introduce el DNI (Para encontrar el cliente): ");
+                    dni2 = scan.next();
 
-                clienteImprimir = listClientes.buscarCliente(dni2);
+                    clienteImprimir = listClientes.buscarCliente(dni2);
 
-                if (clienteImprimir == null) {
-                    System.out.println("No existe el cliente");
+                    if (clienteImprimir == null) {
+                        System.out.println("No existe el cliente");
+                        menuPrincipal();
+                    } else {
+                        System.out.println("***Enhorabuna, hemos encontrado tus datos***");
+                        System.out.println();
+                        clienteImprimir.imprimirCliente();
+                    }
+                    menuImprimirCliente();
+                    break;
+                case 2:
+                    System.out.println();
+                    listClientes.imprimirTodosClientes();
+                    menuImprimirCliente();
+                    break;
+                case 0:
                     menuPrincipal();
-                } else {
-                    System.out.println("***Enhorabuna, hemos encontrado tus datos***");
-                    clienteImprimir.imprimirCliente();
-                }
-                menuImprimirCliente();
-                break;
-            case 2:
-                listClientes.imprimirTodosClientes();
-                menuImprimirCliente();
-                break;
-            case 0:
-                menuPrincipal();
-                break;
-            default:
-                System.out.print("Caracter invalido");
-                menuImprimirCliente();
+                    break;
+                default:
+                    System.out.print("Caracter invalido");
+                    menuImprimirCliente();
+            }
         }
 
     }
 
-    public static void menuImprimirMovimientos() {
+
+    public static void menuImprimirTransacciones() {
 
         Scanner scan = new Scanner(System.in);
         String dni = "", iban = "";
 
         System.out.println("¿Que datos quieres ver?");
-        System.out.println("\t1) Movimientos de una cuenta");
-        System.out.println("\t2) Movimientos de todas las cuentas");
+        System.out.println("\t1) Transacciones de una cuenta");
+        System.out.println("\t2) Transaccioens de todas las cuentas");
         System.out.println("\t0) Salir");
+
         System.out.print("Introduzca tu opcion: ");
         int opcion = scan.nextInt();
 
         switch (opcion) {
             case 1:
-                System.out.print("Introduce el DNI (Para encontrar el cliente): ");
-                dni = scan.next();
-                System.out.print("Introduce el IBAN (Para encontrar la cuenta): ");
-                iban = scan.next();
-
-                //Cuenta cuentaImprimir = listClientes.buscarCuenta(dni, iban);
-
-              //  if (cuentaImprimir == null) {
-                //    System.out.println("No existe la cuenta");
-                    menuPrincipal();
-                //} else {
-                    System.out.println("***Enhorabuna, hemos encontrado tus datos***");
-
-                //}
-                menuImprimirMovimientos();
+                subMenuImprimirTransaccionesCuenta();
+                menuImprimirTransacciones();
                 break;
             case 2:
+                subMenuImprimirTransaccionesTodasCuentas();
                 listMovimientos.imprimirMovimientos();
-                menuImprimirMovimientos();
+                menuImprimirTransacciones();
                 break;
             case 0:
+                System.out.println("Has elegido: Salir");
                 menuPrincipal();
                 break;
             default:
                 System.out.print("Caracter invalido");
-                menuImprimirMovimientos();
+                menuImprimirTransacciones();
         }
 
-    }
+    }      // Voy por aqui
+
+    public static void subMenuImprimirTransaccionesCuenta(){
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("¿Que datos quieres ver?");
+        System.out.println("\t1) Movimientos de todas las cuentas");
+        System.out.println("\t2) Transferencias de todas las cuentas");
+        System.out.println("\t3) Prestamos de todas las cuentas");
+        System.out.println("\t0) Salir");
+
+        System.out.print("Introduzca tu opcion: ");
+        int opcion = scan.nextInt();
+
+    }   // Voy por aqui
+
+    public static void subMenuImprimirTransaccionesTodasCuentas(){
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("¿Que datos quieres ver?");
+        System.out.println("\t1) Movimientos de una cuenta");
+        System.out.println("\t2) Transferencias de una cuenta");
+        System.out.println("\t3) Prestamos de una cuenta");
+        System.out.println("\t0) Salir");
+        System.out.print("Introduzca tu opcion: ");
+        int opcion = scan.nextInt();
+
+    }    // Voy por aqui
+
+    public static Cuenta buscarCuentaTransacciones(){
+        Scanner scan = new Scanner(System.in);
+
+        Cliente clienteTransacciones;
+        Cuenta cuentaTransacciones = null;
+
+        System.out.print("Introduce el DNI: ");
+        String dniTransacciones = scan.nextLine();
+
+        if(listClientes.buscarCliente(dniTransacciones) == null){
+            System.out.println("No se ha encontrado el cliente");
+            menuTransferencia();
+        }else{
+            clienteTransacciones = listClientes.buscarCliente(dniTransacciones);
+            clienteTransacciones.imprimirCuentaCliente();
+            System.out.print("Introduce el numero de cuenta para buscar transacciones: ");
+            String numeroCuentaEmisor = scan.next();
+            cuentaTransacciones = clienteTransacciones.getCuentas().buscarCuenta(numeroCuentaEmisor);
+        }
+
+        return cuentaTransacciones;
+    }   // Voy por aqui, ESTO ESTA HECHO
+
 
     public static void leerFicheroTXT(){
 

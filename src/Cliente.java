@@ -1,9 +1,9 @@
 public class Cliente {
 
-    private String nombre;
-    private String apellidos;
-    private String correoElectronico;
-    private String dni;
+    private final String nombre;
+    private final String apellidos;
+    private final String correoElectronico;
+    private final String dni;
     Fecha diaNacimiento;
     ListaCuentas cuentas;
 
@@ -16,12 +16,6 @@ public class Cliente {
         this.diaNacimiento = fecha;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-    public String getApellidos() {
-        return apellidos;
-    }
     public String getCorreoElectronico() {
         return correoElectronico;
     }
@@ -31,33 +25,65 @@ public class Cliente {
     public ListaCuentas getCuentas() {
         return cuentas;
     }
-    public Fecha getDiaNacimiento() {
-        return diaNacimiento;
-    }
 
     public static boolean validacionNombre(String nombre){
-
-        return (nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5") || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9"));
+        boolean correcto = true;
+        if(nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5") || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9")){
+            correcto = false;
+            System.out.println("***Nombre incorrecto***");
+        }
+        return correcto;
     }
     public static boolean validacionApellidos(String apellidos){
-
-        return (apellidos.contains("0") || apellidos.contains("1") || apellidos.contains("2") || apellidos.contains("3") || apellidos.contains("4") || apellidos.contains("5") || apellidos.contains("6") || apellidos.contains("7") || apellidos.contains("8") || apellidos.contains("9"));
+        boolean correcto = true;
+        if(apellidos.contains("0") || apellidos.contains("1") || apellidos.contains("2") || apellidos.contains("3") || apellidos.contains("4") || apellidos.contains("5") || apellidos.contains("6") || apellidos.contains("7") || apellidos.contains("8") || apellidos.contains("9")){
+            correcto = false;
+            System.out.println("***Apellidos incorrectos***");
+        }
+        return correcto;
     }
-    public static boolean validacionCorreo(String correo) {
+    public static boolean validacionCorreo(String correoElectronico) {
+        boolean correcto = false;
+        if(correoElectronico.contains("@upm.es") || correoElectronico.contains("@alumnos.upm.es") || correoElectronico.contains("@UPM.ES") || correoElectronico.contains("@ALUMNOS.UPM.ES")){
+            correcto = true;
+        }else{
+            System.out.println("***Correo incorrecto***");
+        }
+        return correcto;
+    }
+    public static boolean validacionCorreoRepetido(String correoElectronico, ListaClientes listaClientes){
+        boolean repetido = false;
+        if(!listaClientes.comprobarPersonaCorreo(correoElectronico)){
+            repetido = true;
+        }else{
+            System.out.println("***El correo ya esta en uso***");
+        }
 
-        return (correo.contains("@upm.es") || correo.contains("@alumnos.upm.es") || correo.contains("@UPM.ES") || correo.contains("@ALUMNOS.UPM.ES"));
+        return repetido;
     }
     public static boolean validacionDNI(int dniNum, char dniLet) {
 
         boolean correcto = false;
-        char letraDNI [] = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+        char [] letraDNI = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
         int resto =(dniNum % 23);
 
         if(dniLet == letraDNI[resto]){
             correcto = true;
+        }else{
+            System.out.println("***DNI incorrecto***");
         }
 
         return correcto;
+    }
+    public static boolean validacionDniRepetido(String dni, ListaClientes listaClientes){
+        boolean repetido = false;
+        if(!listaClientes.comprobarPersona(dni)){
+            repetido = true;
+        }else{
+            System.out.println("***El DNI ya esta en uso***");
+        }
+
+        return repetido;
     }
 
     public void imprimirCliente(){
@@ -69,10 +95,17 @@ public class Cliente {
         System.out.println("\nDNI: " + dni);
         System.out.println("Correo Electronico: " + correoElectronico);
         System.out.print("Cuentas: \n");
-        cuentas.imprimirTodosCuentas();
-        System.out.println();
+        if(cuentas == null){        // MIRAR ESTO QUE NO FUNCIONA
+            System.out.println("\tNo tiene cuentas");
+        }else{
+            cuentas.imprimirTodosCuentas();
+            System.out.println();
+        }
 
     }
 
+    public void imprimirCuentaCliente(){
+        cuentas.imprimirTodosCuentas();
+    }
 
 }

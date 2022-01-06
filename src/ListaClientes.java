@@ -1,8 +1,8 @@
 public class ListaClientes {
 
-    private Cliente [] clientes;
-    private int numClientes = 0;
-    private final int MAX_CLIENTE = 20;
+    private int numClientes;
+    private static final int MAX_CLIENTE = 20;
+    private final Cliente [] clientes;
 
 
     public ListaClientes(int MAX_CLIENTE){
@@ -11,8 +11,14 @@ public class ListaClientes {
     }
 
     public void addCliente(Cliente cliente){
-        this.clientes[numClientes] = cliente;
-        numClientes++;
+
+        if(numClientes >= MAX_CLIENTE){
+            System.out.println("No se pueden añadir más clientes");
+        }else{
+            this.clientes[numClientes] = cliente;
+            numClientes++;
+        }
+
     }
 
     public Cliente buscarCliente(String dni){
@@ -25,9 +31,24 @@ public class ListaClientes {
         return encontrado;
     }
 
+    public Cliente buscarClienteCorreo(String correoElectronico){
+        Cliente encontrado = null;
+        for(int i = 0; i < numClientes; i++){
+            if (clientes[i].getCorreoElectronico().equals(correoElectronico)) {
+                encontrado = clientes[i];
+            }
+        }
+        return encontrado;
+    }
+
     public boolean comprobarPersona(String dni){
 
         return (buscarCliente(dni) != null);
+    }
+
+    public boolean comprobarPersonaCorreo(String correoElectronico){
+
+        return (buscarClienteCorreo(correoElectronico) != null);
     }
 
     public void imprimirTodosClientes(){

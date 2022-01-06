@@ -1,21 +1,21 @@
 public class Transferencia {
-    private final String ibanEmisor;
-    private final String ibanReceptor;
+
+    private final String cuentaEmisor;
+    private final String cuentaReceptor;
     private final double importe;
 
-    public Transferencia(String ibanEmisor, String ibanReceptor, double importe) {
-        this.ibanEmisor = ibanEmisor;
-        this.ibanReceptor = ibanReceptor;
+    public Transferencia(String cuentaEmisor, String cuentaReceptor, double importe) {
+        this.cuentaEmisor = cuentaEmisor;
+        this.cuentaReceptor = cuentaReceptor;
         this.importe = importe;
     }
 
     public void imprimirTransferenciaEmitida(){
-        System.out.println("[" + ibanEmisor + "] envia " + importe + " a [" + ibanReceptor + "]");
+        System.out.println("[" + cuentaEmisor + "] envia " + importe + " a [" + cuentaReceptor + "]");
     }
 
     public void imprimirTransferenciaRecibida(){
-        System.out.println("[" + ibanReceptor + "] recibe " + importe + " de [" + ibanEmisor + "]");
+        System.out.println("[" + cuentaReceptor + "] recibe " + importe + " de [" + cuentaEmisor + "]");
     }
-
 
 }

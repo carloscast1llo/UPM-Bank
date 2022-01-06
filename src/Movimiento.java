@@ -1,4 +1,5 @@
 public class Movimiento {
+
     private final double importe;
     private final Movimiento.TipoMovimiento tipoMovimiento;
 
@@ -7,20 +8,14 @@ public class Movimiento {
         this.importe = importe;
     }
 
-    public double getImporte() {
-        return this.importe;
-    }
-    public Movimiento.TipoMovimiento getTipoMovimiento() {
-        return this.tipoMovimiento;
-    }
-
     enum TipoMovimiento {
         Deposito,
-        Extraccion;
+        Extraccion
     }
 
     public void imprimirMovimiento() {
         System.out.println("Tipo de movimiento: " + tipoMovimiento);
         System.out.println("Importe: " + importe);
     }
+
 }

@@ -12,7 +12,6 @@ public class Cuenta {
     ListaTransferencias transferenciasEmitidas;
     ListaTransferencias transferenciasRecibidas;
 
-
     public Cuenta(int codigoSucursal, int digitoControl, long numeroCuenta, String iban, TipoCuenta.tipoCuenta tipoCuenta){
         this.codigoSucursal = codigoSucursal;
         this.digitoControl = digitoControl;
@@ -23,29 +22,17 @@ public class Cuenta {
         this.movimiento = new ListaMovimientos();
         this.transferenciasEmitidas = new ListaTransferencias();
         this.transferenciasRecibidas = new ListaTransferencias();
-        //this.prestamos = new ListaPrestamos();
+        this.prestamos = new ListaPrestamos();
     }
 
-    public int getCodigoSucursal() {
-        return codigoSucursal;
-    }
-    public int getDigitoControl() {
-        return digitoControl;
-    }
-    public long getNumeroCuenta() {
-        return numeroCuenta;
-    }
     public double getSaldo() {
         return saldo;
-    }
-    public ListaMovimientos getMovimiento() {
-        return movimiento;
     }
     public String getIban() {
         return iban;
     }
-    public TipoCuenta.tipoCuenta getTipoCuenta() {
-        return tipoCuenta;
+    public ListaMovimientos getMovimiento() {
+        return movimiento;
     }
     public ListaTransferencias getTransferenciasEmitidas() {
         return transferenciasEmitidas;
@@ -53,21 +40,12 @@ public class Cuenta {
     public ListaTransferencias getTransferenciasRecibidas() {
         return transferenciasRecibidas;
     }
+    public ListaPrestamos getPrestamos() {
+        return prestamos;
+    }
 
-    public void setCodigoSucursal(int codigoSucursal) {
-        this.codigoSucursal = codigoSucursal;
-    }
-    public void setDigitoControl(int digitoControl) {
-        this.digitoControl = digitoControl;
-    }
-    public void setNumeroCuenta(long numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
-    }
     public void setSaldo(double saldo) {
         this.saldo = saldo;
-    }
-    public void setTipoCuenta(TipoCuenta.tipoCuenta tipoCuenta) {
-        this.tipoCuenta = tipoCuenta;
     }
 
     public static long fNumeroCuenta(){
@@ -177,7 +155,7 @@ public class Cuenta {
     }
 
     public void imprimirCuenta(){
-        System.out.println("\t"+tipoCuenta + " -- [" + iban + "] -- " + saldo + "€");
+        System.out.println(tipoCuenta + " -- [" + iban + "] -- " + saldo + "€");
     }
 
 }

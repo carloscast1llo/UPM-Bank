@@ -15,7 +15,7 @@ public class ListaMovimientos {
         return numMovimientos;
     }
 
-    public void añadirMovimiento(Movimiento movimiento) {
+    public void addMovimiento(Movimiento movimiento) {
         this.listaMovimientos[numMovimientos] = movimiento;
         numMovimientos++;
     }

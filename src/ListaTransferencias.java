@@ -1,14 +1,10 @@
 public class ListaTransferencias {
     private int numTransferencias;
-    private final int maxTransferencias = 50;
+    private static final int MAX_TRANSFERENCIAS = 50;
     private final Transferencia[] transferencias;
 
-    public int getNumTransferencias() {
-        return numTransferencias;
-    }
-
     public ListaTransferencias() {
-        this.transferencias = new Transferencia[maxTransferencias];
+        this.transferencias = new Transferencia[MAX_TRANSFERENCIAS];
         this.numTransferencias = 0;
     }
 
