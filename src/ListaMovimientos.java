@@ -1,4 +1,5 @@
 public class ListaMovimientos {
+
     private int numMovimientos;
     private static final int MAX_MOVIMIENTOS = 50;
     private final Movimiento[] listaMovimientos;
@@ -20,7 +21,7 @@ public class ListaMovimientos {
         numMovimientos++;
     }
 
-    public void imprimirMovimientos() {
+    public void imprimirTodosMovimientos() {
         for (int i = 0; i < numMovimientos; i++) {
             listaMovimientos[i].imprimirMovimiento();
         }

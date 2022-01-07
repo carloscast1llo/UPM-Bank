@@ -1,13 +1,12 @@
 public class ListaCuentas {
 
     private int numCuentas;
-    private final int MAX_CUENTAS;
+    private static final int MAX_CUENTAS = 10;
     private final Cuenta [] listaCuentas;
 
-    public ListaCuentas(int max) {
-        MAX_CUENTAS = max;
+    public ListaCuentas(int MAX_CUENTAS) {
         this.listaCuentas = new Cuenta[MAX_CUENTAS];
-        numCuentas = 0;
+        this.numCuentas = 0;
     }
 
     public Cuenta buscarCuenta(String iban){
@@ -33,10 +32,18 @@ public class ListaCuentas {
         }
     }
 
-    public void imprimirTodosCuentas(){
+    public void imprimirTodasCuentas(){
         for(int i = 0; i < numCuentas; i++){
             System.out.print("\t[" + (i+1) + "] "); listaCuentas[i].imprimirCuenta();
         }
+
+    }
+
+    public void imprimirTodasCuenta2(){
+        for(int i = 0; i < numCuentas; i++){
+            System.out.print("\t[" + (i+1) + "] "); listaCuentas[i].imprimirListaTransacciones();
+        }
+
     }
 
 }

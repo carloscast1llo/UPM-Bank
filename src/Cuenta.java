@@ -6,6 +6,7 @@ public class Cuenta {
     private long numeroCuenta;
     private double saldo;
     private String iban;
+    ListaCuentas cuentas;
     TipoCuenta.tipoCuenta tipoCuenta;
     ListaMovimientos movimiento;
     ListaPrestamos prestamos;
@@ -90,7 +91,7 @@ public class Cuenta {
         int a1 = 9, a2 = 0, a3 = 1, a4 = 0;
         int b4 = 0;
         int nC1, nC2;
-        int nC1F = 0;
+        int nC1F = 0, nC2F = 0;
 
         int b3 = codigoSucursal % 10;
         aux1 = codigoSucursal / 10;
@@ -127,12 +128,19 @@ public class Cuenta {
         int d2 = aux2 % 10;
         aux2 = aux2 / 10;
         int d1 = aux2 % 10;
-        aux2 = aux2 / 10;
 
         nC2 = 11 - ((d1 + 2 * d2 + 4 * d3 + 8 * d4 + 5 * d5 + 10 * d6 + 9 * d7 + 7 * d8 + 3 * d9 + 6 * d10) % 11);
 
+        if(nC2 < 10){
+            nC2F = nC2;
+        }else if(nC1 == 11){
+            nC2F = 0;
+        }else if(nC2 == 10){
+            nC2F = 1;
+        }
+
         c1 = String.valueOf(nC1F);
-        c2 = String.valueOf(nC2);
+        c2 = String.valueOf(nC2F);
         dcString = c1 + c2;
 
         digitoControl = Integer.parseInt(dcString);
@@ -155,7 +163,27 @@ public class Cuenta {
     }
 
     public void imprimirCuenta(){
-        System.out.println(tipoCuenta + " -- [" + iban + "] -- " + saldo + "€");
+        System.out.println(tipoCuenta + " --> [" + iban + "] --> " + saldo + "€");
+    }
+
+    public void imprimirListaTransacciones(){
+
+        System.out.println("Tipo cuenta: "+ tipoCuenta + " --> IBAN: [" + iban + "] --> Saldo: " + saldo + "€");
+
+        System.out.println("\t\tTransacciones realizadas: ");
+
+        System.out.println("\t\t\t~ Movimientos ~");
+        movimiento.imprimirTodosMovimientos();
+
+        System.out.println("\t\t\t~ Transferencias ~");
+        System.out.println("\t\t\t\tTansferencias emitidas: ");
+        transferenciasEmitidas.imprimirTransferenciaEmitidas();
+        System.out.println("\t\t\t\tTransferencias recibidas: ");
+        transferenciasRecibidas.imprimirTransferenciaRecibidas();
+
+        System.out.println("\t\t\t~ Prestamos ~");
+        prestamos.imprimirTodosPrestamos();
+
     }
 
 }

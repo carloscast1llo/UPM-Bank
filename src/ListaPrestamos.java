@@ -21,9 +21,22 @@ public class ListaPrestamos {
         numPrestamos++;
     }
 
-    public void imprimirPrestamos(){
+    public Prestamo buscarPrestamo(double capital, int numeroAnios, double interesAnual) {
 
+        for (int i = 0; i < numPrestamos; i++) {
+            if (prestamos[i].getCapital() == capital && prestamos[i].getNumeroAnios() == numeroAnios && prestamos[i].getInteresAnual() == interesAnual) {
+                return prestamos[i];
+            }
+        }
 
+        return null;
+    }
+
+    public void imprimirTodosPrestamos(){
+
+        for (int i = 0; i < numPrestamos; i++) {
+            prestamos[i].imprimirPrestamo();
+        }
     }
 
 

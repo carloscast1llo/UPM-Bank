@@ -11,7 +11,6 @@ public class ListaClientes {
     }
 
     public void addCliente(Cliente cliente){
-
         if(numClientes >= MAX_CLIENTE){
             System.out.println("No se pueden añadir más clientes");
         }else{
@@ -23,21 +22,25 @@ public class ListaClientes {
 
     public Cliente buscarCliente(String dni){
         Cliente encontrado = null;
+
         for(int i = 0; i < numClientes; i++){
             if (clientes[i].getDni().equals(dni)) {
                 encontrado = clientes[i];
             }
         }
+
         return encontrado;
     }
 
     public Cliente buscarClienteCorreo(String correoElectronico){
         Cliente encontrado = null;
+
         for(int i = 0; i < numClientes; i++){
             if (clientes[i].getCorreoElectronico().equals(correoElectronico)) {
                 encontrado = clientes[i];
             }
         }
+
         return encontrado;
     }
 
@@ -52,11 +55,11 @@ public class ListaClientes {
     }
 
     public void imprimirTodosClientes(){
-
         for(int i = 0; i < numClientes; i++){
             System.out.println("["+(i + 1)+"]");
             clientes[i].imprimirCliente();
         }
+
     }
 
 }

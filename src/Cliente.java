@@ -95,17 +95,14 @@ public class Cliente {
         System.out.println("\nDNI: " + dni);
         System.out.println("Correo Electronico: " + correoElectronico);
         System.out.print("Cuentas: \n");
-        if(cuentas == null){        // MIRAR ESTO QUE NO FUNCIONA
-            System.out.println("\tNo tiene cuentas");
-        }else{
-            cuentas.imprimirTodosCuentas();
-            System.out.println();
-        }
+        cuentas.imprimirTodasCuenta2();
+        System.out.println();
+
 
     }
 
     public void imprimirCuentaCliente(){
-        cuentas.imprimirTodosCuentas();
+        cuentas.imprimirTodasCuentas();
     }
 
 }

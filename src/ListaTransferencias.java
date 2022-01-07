@@ -1,4 +1,5 @@
 public class ListaTransferencias {
+
     private int numTransferencias;
     private static final int MAX_TRANSFERENCIAS = 50;
     private final Transferencia[] transferencias;

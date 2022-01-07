@@ -11,11 +11,11 @@ public class Transferencia {
     }
 
     public void imprimirTransferenciaEmitida(){
-        System.out.println("[" + cuentaEmisor + "] envia " + importe + " a [" + cuentaReceptor + "]");
+        System.out.println("\t\t\t\t\t[" + cuentaEmisor + "] envia " + importe + " a [" + cuentaReceptor + "]");
     }
 
     public void imprimirTransferenciaRecibida(){
-        System.out.println("[" + cuentaReceptor + "] recibe " + importe + " de [" + cuentaEmisor + "]");
+        System.out.println("\t\t\t\t\t[" + cuentaReceptor + "] recibe " + importe + " de [" + cuentaEmisor + "]");
     }
 
 }
