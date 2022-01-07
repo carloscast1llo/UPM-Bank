@@ -4,10 +4,16 @@ public class ListaClientes {
     private static final int MAX_CLIENTE = 20;
     private final Cliente [] clientes;
 
-
     public ListaClientes(int MAX_CLIENTE){
         this.clientes = new Cliente[MAX_CLIENTE];
         numClientes = 0;
+    }
+
+    public int getNumClientes() {
+        return numClientes;
+    }
+    public Cliente getClientePos(int pos){
+        return clientes[pos];
     }
 
     public void addCliente(Cliente cliente){

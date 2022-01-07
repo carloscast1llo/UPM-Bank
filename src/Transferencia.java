@@ -10,6 +10,14 @@ public class Transferencia {
         this.importe = importe;
     }
 
+    public double getImporte() {
+        return importe;
+    }
+
+    public String getCuentaReceptor() {
+        return cuentaReceptor;
+    }
+
     public void imprimirTransferenciaEmitida(){
         System.out.println("\t\t\t\t\t[" + cuentaEmisor + "] envia " + importe + " a [" + cuentaReceptor + "]");
     }

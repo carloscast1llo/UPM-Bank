@@ -9,6 +9,14 @@ public class ListaCuentas {
         this.numCuentas = 0;
     }
 
+    public int getNumCuentas() {
+        return numCuentas;
+    }
+
+    public Cuenta getCuentaPos(int pos) {
+        return listaCuentas[pos];
+    }
+
     public Cuenta buscarCuenta(String iban){
         int i = 0;
         Cuenta cuent = null;

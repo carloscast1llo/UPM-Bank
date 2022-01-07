@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Banco {
@@ -62,7 +63,7 @@ public class Banco {
                     System.out.println("--------------------------------");
                     System.out.println("*** Has finalizado la sesion ***");
                     System.out.println("--------------------------------");
-                    //escribirFichero();
+                    escribirFichero();
                     break;
                 default:
                     System.out.print("***Caracter invalido***");
@@ -150,6 +151,8 @@ public class Banco {
 
             System.out.print("Introduce el DNI: ");
             dni = scan.nextLine();
+
+            dni = dni.toUpperCase();
 
             clienteCuenta = listClientes.buscarCliente(dni);
 
@@ -320,11 +323,12 @@ public class Banco {
 
         System.out.print("Introduce el DNI del cliente: ");
         dni = scan.next();
+        dni = dni.toUpperCase();
+
         busquedaCliente = listClientes.buscarCliente(dni);
 
         if (busquedaCliente == null) {
             System.out.println("***El cliente no existe***");
-            //menuBusquedaMovimiento();
         }else{
             busquedaCliente.imprimirCuentaCliente();
             System.out.print("Introduce el IBAN de la cuenta: ");
@@ -332,7 +336,6 @@ public class Banco {
             busquedaCuenta = busquedaCliente.getCuentas().buscarCuenta(iban);
             if (busquedaCuenta == null) {
                 System.out.println("***La cuenta no existe***");
-                //menuBusquedaMovimiento();
             }else{
                 if(busquedaCuenta.getMovimiento().getNumMovimientos() > busquedaCuenta.getMovimiento().getMaxMovimientos()){
                     System.out.println("***Ha alcanzado el numero maximos de movimientos***");
@@ -428,10 +431,14 @@ public class Banco {
 
     public static Cuenta buscarCuentaEmisorTransferencia(){
         Scanner scan = new Scanner(System.in);
+
         Cliente clienteEmisor;
         Cuenta cuentaEmisor = null;
+
         System.out.print("Introduce el DNI de cuenta emisor: ");
         String dniEmisor = scan.nextLine();
+        dniEmisor = dniEmisor.toUpperCase();
+
         if(listClientes.buscarCliente(dniEmisor) == null){
             System.out.println("No se ha encontrado el cliente");
             menuTransferencia();
@@ -449,11 +456,15 @@ public class Banco {
     }
 
     public static Cuenta buscarCuentaReceptorTransferencia(){
+
         Scanner scan = new Scanner(System.in);
         Cliente clienteReceptor;
         Cuenta cuentaReceptor = null;
+
         System.out.print("Introduce el DNI de cuenta receptor: ");
         String dniReceptor = scan.nextLine();
+        dniReceptor = dniReceptor.toUpperCase();
+
         if(listClientes.buscarCliente(dniReceptor) == null){
             System.out.println("No se ha encontrado el cliente");
             menuTransferencia();
@@ -509,6 +520,7 @@ public class Banco {
 
         System.out.print("Introduce el DNI: ");
         String dniPrestamo = scan.nextLine();
+        dniPrestamo = dniPrestamo.toUpperCase();
 
         if(listClientes.buscarCliente(dniPrestamo) == null){
             System.out.println("No se ha encontrado el cliente");
@@ -568,6 +580,7 @@ public class Banco {
                 case 1:
                     System.out.print("Introduce el DNI (Para encontrar el cliente): ");
                     String dni2 = scan.next();
+                    dni2 = dni2.toUpperCase();
 
                     clienteImprimir = listClientes.buscarCliente(dni2);
 
@@ -658,8 +671,21 @@ public class Banco {
         BufferedWriter bw = null;
 
         bw = new BufferedWriter(new FileWriter(archivo));
-        for(int i=0; i<1; i++){
-            bw.write(1);
+
+        for(int i=0; i<listClientes.getNumClientes(); i++){
+            for (int j=0; j< listClientes.getClientePos(i).getCuentas().getNumCuentas(); j++){
+                bw.write(listClientes.getClientePos(i).getCuentas().getCuentaPos(j).getIban() + "\n");
+            }
+        }
+
+        for (int i=0; i<listClientes.getNumClientes(); i++){
+            for (int j=0; j<listClientes.getClientePos(i).getCuentas().getNumCuentas(); j++){
+                bw.write("\n");
+                for (int k=0; k<listClientes.getClientePos(i).getCuentas().getNumCuentas(); k++){
+                    double saldo = listClientes.getClientePos(i).getCuentas().getCuentaPos(j).saldoFichero(listClientes.getClientePos(i).getCuentas().getCuentaPos(k));
+                    bw.write(String.format("%10.2f", saldo));
+                }
+            }
         }
 
         System.out.println("*** Fichero creado correctamente ***");
@@ -667,4 +693,5 @@ public class Banco {
         bw.close();
 
     }
+
 }

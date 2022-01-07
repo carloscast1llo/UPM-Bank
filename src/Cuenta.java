@@ -6,7 +6,6 @@ public class Cuenta {
     private long numeroCuenta;
     private double saldo;
     private String iban;
-    ListaCuentas cuentas;
     TipoCuenta.tipoCuenta tipoCuenta;
     ListaMovimientos movimiento;
     ListaPrestamos prestamos;
@@ -53,31 +52,7 @@ public class Cuenta {
 
         long numeroCuenta;
 
-        int d1 = (int) Math.floor(Math.random() * (10));
-        int d2 = (int) Math.floor(Math.random() * (10));
-        int d3 = (int) Math.floor(Math.random() * (10));
-        int d4 = (int) Math.floor(Math.random() * (10));
-        int d5 = (int) Math.floor(Math.random() * (10));
-        int d6 = (int) Math.floor(Math.random() * (10));
-        int d7 = (int) Math.floor(Math.random() * (10));
-        int d8 = (int) Math.floor(Math.random() * (10));
-        int d9 = (int) Math.floor(Math.random() * (10));
-        int d10 = (int) Math.floor(Math.random() * (10));
-
-        String numd1 = String.valueOf(d1);
-        String numd2 = String.valueOf(d2);
-        String numd3 = String.valueOf(d3);
-        String numd4 = String.valueOf(d4);
-        String numd5 = String.valueOf(d5);
-        String numd6 = String.valueOf(d6);
-        String numd7 = String.valueOf(d7);
-        String numd8 = String.valueOf(d8);
-        String numd9 = String.valueOf(d9);
-        String numd10 = String.valueOf(d10);
-
-        String ncString = numd1 + numd2 + numd3 + numd4 + numd5 + numd6 + numd7 + numd8 + numd9 + numd10;
-
-        numeroCuenta = Long.parseLong(ncString);
+        numeroCuenta = (long) (Math.random() * (9999999999L - 1000000000L) + 1000000000L);
 
         return numeroCuenta;
     }
@@ -109,25 +84,16 @@ public class Cuenta {
             nC1F = 1;
         }
 
-        int d10 = (int) numeroCuenta % 10;
-        aux2 = (int) numeroCuenta / 10;
-        int d9 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d8 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d7 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d6 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d5 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d4 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d3 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d2 = aux2 % 10;
-        aux2 = aux2 / 10;
-        int d1 = aux2 % 10;
+        int d1 = (int) ((numeroCuenta % 10000000000L) / 1000000000);
+        int d2 = (int) ((numeroCuenta % 1000000000) / 100000000);
+        int d3 = (int) ((numeroCuenta % 100000000) / 10000000);
+        int d4 = (int) ((numeroCuenta % 10000000) / 1000000);
+        int d5 = (int) ((numeroCuenta % 1000000) / 100000);
+        int d6 = (int) ((numeroCuenta % 100000) / 10000);
+        int d7 = (int) ((numeroCuenta % 10000) / 1000);
+        int d8 = (int) ((numeroCuenta % 1000) / 100);
+        int d9 = (int) ((numeroCuenta % 100) / 10);
+        int d10 = (int) (numeroCuenta % 10);
 
         nC2 = 11 - ((d1 + 2 * d2 + 4 * d3 + 8 * d4 + 5 * d5 + 10 * d6 + 9 * d7 + 7 * d8 + 3 * d9 + 6 * d10) % 11);
 
@@ -163,12 +129,12 @@ public class Cuenta {
     }
 
     public void imprimirCuenta(){
-        System.out.println(tipoCuenta + " --> [" + iban + "] --> " + saldo + "€");
+        System.out.printf("Tipo cuenta: %s --> IBAN: [%d] --> Saldo: %.2d€",tipoCuenta, iban, saldo);
     }
 
     public void imprimirListaTransacciones(){
 
-        System.out.println("Tipo cuenta: "+ tipoCuenta + " --> IBAN: [" + iban + "] --> Saldo: " + saldo + "€");
+        System.out.printf("Tipo cuenta: %s --> IBAN: [%d] --> Saldo: %.2d€",tipoCuenta, iban, saldo);
 
         System.out.println("\t\tTransacciones realizadas: ");
 
@@ -186,4 +152,16 @@ public class Cuenta {
 
     }
 
+    public double saldoFichero(Cuenta cuenta){
+
+        double saldo = 0;
+
+        for(int i = 0;i<transferenciasEmitidas.getNumTransferencias();i++){
+            if(transferenciasEmitidas.getTransferenciasPos(i).getCuentaReceptor().equals(cuenta.getIban())){
+                saldo += transferenciasEmitidas.getTransferenciasPos(i).getImporte();
+            }
+        }
+
+        return saldo;
+    }
 }

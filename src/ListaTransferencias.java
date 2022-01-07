@@ -9,6 +9,14 @@ public class ListaTransferencias {
         this.numTransferencias = 0;
     }
 
+    public int getNumTransferencias() {
+        return numTransferencias;
+    }
+
+    public Transferencia getTransferenciasPos(int pos) {
+        return transferencias[pos];
+    }
+
     public  void addTransferencia(Transferencia transferencia) {
         this.transferencias[numTransferencias] = transferencia;
         numTransferencias++;
