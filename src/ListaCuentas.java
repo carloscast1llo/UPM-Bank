@@ -12,7 +12,6 @@ public class ListaCuentas {
     public int getNumCuentas() {
         return numCuentas;
     }
-
     public Cuenta getCuentaPos(int pos) {
         return listaCuentas[pos];
     }
@@ -47,7 +46,7 @@ public class ListaCuentas {
 
     }
 
-    public void imprimirTodasCuenta2(){
+    public void imprimirTodasCuentaTransacciones(){
         for(int i = 0; i < numCuentas; i++){
             System.out.print("\t[" + (i+1) + "] "); listaCuentas[i].imprimirListaTransacciones();
         }

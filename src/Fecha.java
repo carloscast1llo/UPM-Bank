@@ -28,6 +28,8 @@ public class Fecha {
                     fechaCorrecta = dia <= 28 || (dia <= 29 && esBisiesto(year));
                 else if (mes == 4 || mes == 6 || mes == 9 || mes == 11)
                     fechaCorrecta = dia <= 30;
+            }else{
+                System.out.println("***Fecha incorrecta***");
             }
             return fechaCorrecta;
         }

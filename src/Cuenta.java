@@ -62,17 +62,17 @@ public class Cuenta {
         String dcString, c1, c2;
         int digitoControl;
 
-        int aux1, aux2;
+        int aux1;
         int a1 = 9, a2 = 0, a3 = 1, a4 = 0;
-        int b4 = 0;
+        int b1 = 0;
         int nC1, nC2;
         int nC1F = 0, nC2F = 0;
 
-        int b3 = codigoSucursal % 10;
+        int b4 = codigoSucursal % 10;
         aux1 = codigoSucursal / 10;
-        int b2 = aux1 % 10;
+        int b3 = aux1 % 10;
         aux1 = aux1 / 10;
-        int b1 = aux1 % 10;
+        int b2 = aux1 % 10;
 
         nC1 = 11 - ((6 * b4 + 3 * b3 + 7 * b2 + 9 * b1 + 10 * a4 + 5 * a3 + 8 * a2 + 4 * a1) % 11);
 
@@ -129,12 +129,12 @@ public class Cuenta {
     }
 
     public void imprimirCuenta(){
-        System.out.printf("Tipo cuenta: %s --> IBAN: [%d] --> Saldo: %.2d€",tipoCuenta, iban, saldo);
+        System.out.printf("Tipo cuenta: %s --> IBAN: [%s] --> Saldo: %.2f€  \n",tipoCuenta, iban, saldo);
     }
 
     public void imprimirListaTransacciones(){
 
-        System.out.printf("Tipo cuenta: %s --> IBAN: [%d] --> Saldo: %.2d€",tipoCuenta, iban, saldo);
+        System.out.printf("Tipo cuenta: %s --> IBAN: [%s] --> Saldo: %.2f€ \n",tipoCuenta, iban, saldo);
 
         System.out.println("\t\tTransacciones realizadas: ");
 

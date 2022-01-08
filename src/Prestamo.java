@@ -13,20 +13,10 @@ public class Prestamo {
     public double getCapital() {
         return capital;
     }
-    public int getNumeroAnios() {
-        return numeroAnios;
-    }
-    public double getInteresAnual() {
-        return interesAnual;
-    }
 
     public void imprimirPrestamo(){
 
         System.out.println("\t\t\t\tCapital: " + capital + "€ --> " + "Numero de años: " + numeroAnios + " --> " + "Interes anual: " + interesAnual + "%");
-
-    }
-
-    public void imprimirTA(){
 
     }
 

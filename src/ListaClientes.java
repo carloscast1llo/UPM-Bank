@@ -1,23 +1,16 @@
 public class ListaClientes {
 
     private int numClientes;
-    private static final int MAX_CLIENTE = 20;
+    private static final int MAX_CLIENTES = 20;
     private final Cliente [] clientes;
 
-    public ListaClientes(int MAX_CLIENTE){
-        this.clientes = new Cliente[MAX_CLIENTE];
+    public ListaClientes(int MAX_CLIENTES){
+        this.clientes = new Cliente[MAX_CLIENTES];
         numClientes = 0;
     }
 
-    public int getNumClientes() {
-        return numClientes;
-    }
-    public Cliente getClientePos(int pos){
-        return clientes[pos];
-    }
-
     public void addCliente(Cliente cliente){
-        if(numClientes >= MAX_CLIENTE){
+        if(numClientes >= MAX_CLIENTES){
             System.out.println("No se pueden añadir más clientes");
         }else{
             this.clientes[numClientes] = cliente;

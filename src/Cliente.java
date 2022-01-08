@@ -95,9 +95,8 @@ public class Cliente {
         System.out.println("\nDNI: " + dni);
         System.out.println("Correo Electronico: " + correoElectronico);
         System.out.print("Cuentas: \n");
-        cuentas.imprimirTodasCuenta2();
+        cuentas.imprimirTodasCuentaTransacciones();
         System.out.println();
-
 
     }
 
