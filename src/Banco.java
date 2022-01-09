@@ -18,7 +18,6 @@ public class Banco {
 
     public static void menuPrincipal() throws IOException {
         Scanner scan = new Scanner(System.in);
-
         int opcion;
 
         do {
@@ -71,9 +70,7 @@ public class Banco {
 
 
     public static void crearCliente() {     //Crea un nuevo cliente
-
         Scanner scan = new Scanner(System.in);
-
         String nombre1, apellidos1, correoElectronico1, dni1;
         int dia, mes, year, dniNum;
         char dniLet;
@@ -122,10 +119,8 @@ public class Banco {
             dniLet = Character.toUpperCase(dniLet);
             dni1 = String.valueOf(dniNum) + dniLet;
 
-            for (int i = 0; i < dni1.length(); i++) {
-                if (dni1.length() < 9){
-                    dni1 = "0" + dni1;
-                }
+            while (dni1.length() < 9){
+                dni1 = "0" + dni1;
             }
 
         } while (!Cliente.validacionDNI(dniNum, dniLet) || !Cliente.validacionDniRepetido(dni1, listClientes));
@@ -142,7 +137,6 @@ public class Banco {
 
 
     public static void crearCuentaBancaria(int codigoSucursal) {    //Crea una nueva cuenta bancaria
-
         Scanner scan = new Scanner(System.in);
         Cliente clienteCuenta;
         long numeroCuenta;
@@ -163,27 +157,19 @@ public class Banco {
 
             System.out.print("Introduce el DNI: ");
             dni = scan.nextLine();
-
             dni = dni.toUpperCase();
 
             clienteCuenta = listClientes.buscarCliente(dni);
-
             if (clienteCuenta == null) {
                 System.out.println("***No existe el cliente***");
             } else {
-
                 System.out.println("*** Enhorabuna, hemos encontrado tus datos ***");
-
                 TipoCuenta.tipoCuenta tipoCuenta = menuTipoCuenta();
-
                 if(tipoCuenta == null){
                     tipoCuenta = menuTipoCuenta();
                 }
-
                 digitoControl = Cuenta.fDigitoControl(numeroCuenta, codigoSucursal);
-
                 iban = Cuenta.fIban(numeroCuenta, digitoControl, codigoSucursal);
-
                 System.out.printf("Tu numero de cuenta bancaria nuevo es: %2s\n", iban);
 
                 cuenta = new Cuenta(codigoSucursal, digitoControl, numeroCuenta, iban, tipoCuenta);
@@ -196,7 +182,6 @@ public class Banco {
 
     public static TipoCuenta.tipoCuenta menuTipoCuenta() {  //Menu para elegir el tipo de cuenta
         Scanner scan = new Scanner(System.in);
-
         TipoCuenta.tipoCuenta tiposCuenta = null;
 
         System.out.print("Elige el tipo de cuenta: \n\t1) Corriente\n\t2) Ahorro \n\t3) Remunerada\n");
@@ -265,7 +250,6 @@ public class Banco {
 
     public static void menuIngresoExtraccion(Cuenta busquedaCuenta) {    //Menu para elegir el movimiento que quiere realizar
         Scanner scan = new Scanner(System.in);
-
         Movimiento movimiento;
         Movimiento.TipoMovimiento movimientoTipo;
 
@@ -337,7 +321,6 @@ public class Banco {
     }
 
     public static Movimiento menuDeposito(Cuenta busquedaCuenta, Movimiento.TipoMovimiento movimientoTipo) {    //Menu para realizar el deposito
-
         Scanner scan = new Scanner(System.in);
         double importe;
 
@@ -353,13 +336,13 @@ public class Banco {
 
         System.out.println("Se ha realizado el deposito con exito");
 
-
         return new Movimiento(movimientoTipo, importe);
     }
 
     public static Movimiento menuExtraccion(Cuenta busquedaCuenta, Movimiento.TipoMovimiento movimientoTipo) {  //Menu para realizar la extraccion
         Scanner scan = new Scanner(System.in);
         double importe;
+
         do {
             System.out.print("Introduce el importe: ");
             importe = scan.nextDouble();
@@ -373,13 +356,13 @@ public class Banco {
         busquedaCuenta.setSaldo(busquedaCuenta.getSaldo() - importe);
 
         System.out.println("Se ha realizado la extraccion con exito");
+
         return new Movimiento(movimientoTipo, importe);
     }
 
 
     public static void menuTransferencia() {    //Menu para realizar la transferencia
         Scanner scan = new Scanner(System.in);
-
         Cuenta cuentaEmisor, cuentaReceptor;
         Transferencia transferenciaEmitida, transferenciaRecibida;
         double importe;
@@ -397,7 +380,7 @@ public class Banco {
             }else {
                 System.out.println("*** Datos del receptor encontrado con exito ***");
                 System.out.println("Calculando saldo....");
-                System.out.println("Saldo emisor: " + cuentaEmisor.getSaldo());
+                System.out.printf("Saldo emisor: %.2f\n",cuentaEmisor.getSaldo());
                 do{
                     System.out.print("Introduce el importe que quieres hacer la transferencia: ");
                     importe = scan.nextDouble();
@@ -446,7 +429,6 @@ public class Banco {
     }
 
     public static Cuenta buscarCuentaReceptorTransferencia(){   //Busca la cuenta receptor de la transferencia
-
         Scanner scan = new Scanner(System.in);
         Cliente clienteReceptor;
         Cuenta cuentaReceptor = null;
@@ -471,9 +453,7 @@ public class Banco {
 
 
     public static void menuPrestamo(){  //Menu para realizar un prestamo
-
         Scanner scan = new Scanner(System.in);
-
         double capital, interesAnual;
         int numeroAnios;
         Cuenta busquedaCuentaPrestamo;
@@ -556,9 +536,7 @@ public class Banco {
 
 
     public static void menuImprimirCliente() throws IOException {    //Menu para imprimir los datos de un cliente y cuentas
-
         Cliente clienteImprimir;
-
         Scanner scan = new Scanner(System.in);
 
         if(cliente == null){
@@ -604,13 +582,11 @@ public class Banco {
     }
 
     public static int leerFicheroSucursal() throws IOException {    //Lee el fichero de sucursales y devuelve el numero de sucursal
-
         Scanner scan = new Scanner(System.in);
         File leerFichero = new File("Sucursales.txt");
         FileReader fr;
         BufferedReader br;
         String[][] datos = new String[4][2];
-
         fr = new FileReader(leerFichero);
         br = new BufferedReader(fr);
         String linea;
@@ -634,7 +610,6 @@ public class Banco {
 
         codigoSucursal = Integer.parseInt(datos[option-1][1]);
         System.out.println("*** Has elegido la sucursal " + datos[option-1][0] + " ***");
-
         br.close();
 
         return codigoSucursal;
@@ -642,7 +617,6 @@ public class Banco {
 
 
     public static void escribirFichero() throws IOException {    //Escribe la matriz de las cuentas y las transferencias en el fichero
-
         File archivo = new File("Transferencias.txt");
         BufferedWriter bw;
 
@@ -661,7 +635,6 @@ public class Banco {
         }
 
         System.out.println("*** Fichero creado correctamente ***");
-
         bw.close();
 
     }

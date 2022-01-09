@@ -18,11 +18,11 @@ public class Transferencia {
     }
 
     public void imprimirTransferenciaEmitida(){     // Imprime la transferencia que se ha emitido
-        System.out.println("\t\t\t\t\t[" + cuentaEmisor + "] envia " + importe + " a [" + cuentaReceptor + "]");
+        System.out.printf("\t\t\t\t\t[%s] envia %.2f a [%s]\n", cuentaEmisor, importe, cuentaReceptor);
     }
 
     public void imprimirTransferenciaRecibida(){     // Imprime la transferencia que se ha recibido
-        System.out.println("\t\t\t\t\t[" + cuentaReceptor + "] recibe " + importe + " de [" + cuentaEmisor + "]");
+        System.out.printf("\t\t\t\t\t[%s] recibe %.2f de [%s]\n", cuentaReceptor, importe, cuentaEmisor);
     }
 
 }

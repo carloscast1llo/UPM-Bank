@@ -14,7 +14,7 @@ public class Movimiento {
     }
 
     public void imprimirMovimiento() {  // Imprime el movimiento
-        System.out.println("\t\t\t\t" + tipoMovimiento + " --> " + importe + "€");
+        System.out.printf("\t\t\t\t %s --> %.2f€\n", tipoMovimiento, importe);
     }
 
 }

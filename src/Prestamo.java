@@ -16,7 +16,7 @@ public class Prestamo {
 
     public void imprimirPrestamo(){     // Imprime el prestamo
 
-        System.out.println("\t\t\t\tCapital: " + capital + "€ --> " + "Numero de años: " + numeroAnios + " --> " + "Interes anual: " + interesAnual + "%");
+        System.out.printf("\t\t\t\tCapital: %.2f€ --> Numero de años: %d --> Interes anual: %.2f%%\n",capital, numeroAnios, interesAnual);
 
     }
 
