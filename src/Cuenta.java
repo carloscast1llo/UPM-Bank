@@ -31,6 +31,9 @@ public class Cuenta {
     public String getIban() {
         return iban;
     }
+    public long getNumeroCuenta() {
+        return numeroCuenta;
+    }
     public ListaMovimientos getMovimiento() {
         return movimiento;
     }
@@ -48,7 +51,7 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public static long fNumeroCuenta(){
+    public static long fNumeroCuenta(){     //Genera un numero de cuenta aleatorio
 
         long numeroCuenta;
 
@@ -57,7 +60,7 @@ public class Cuenta {
         return numeroCuenta;
     }
 
-    public static int fDigitoControl(long numeroCuenta, int codigoSucursal){
+    public static int fDigitoControl(long numeroCuenta, int codigoSucursal){     //Genera el digito de control
 
         String dcString, c1, c2;
         int digitoControl;
@@ -114,7 +117,7 @@ public class Cuenta {
         return digitoControl;
     }
 
-    public static String fIban(long numeroCuenta, int digitoControl, int codigoSucursal){
+    public static String fIban(long numeroCuenta, int digitoControl, int codigoSucursal){     //Genera el iban
 
         String iban;
 
@@ -128,11 +131,11 @@ public class Cuenta {
         return iban;
     }
 
-    public void imprimirCuenta(){
+    public void imprimirCuenta(){     //Imprime los datos de la cuenta
         System.out.printf("Tipo cuenta: %s --> IBAN: [%s] --> Saldo: %.2f€  \n",tipoCuenta, iban, saldo);
     }
 
-    public void imprimirListaTransacciones(){
+    public void imprimirListaTransacciones(){     //Imprime las transacciones de la cuenta
 
         System.out.printf("Tipo cuenta: %s --> IBAN: [%s] --> Saldo: %.2f€ \n",tipoCuenta, iban, saldo);
 
@@ -152,7 +155,7 @@ public class Cuenta {
 
     }
 
-    public double saldoFichero(Cuenta cuenta){
+    public double saldoFichero(Cuenta cuenta){   //Devuelve el importe total de una cuenta para el fichero
 
         double saldo = 0;
 
@@ -164,4 +167,5 @@ public class Cuenta {
 
         return saldo;
     }
+
 }

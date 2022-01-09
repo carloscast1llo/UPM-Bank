@@ -6,8 +6,8 @@ public class Banco {
     private static Fecha fecha = null;
     private static Cuenta cuenta = null;
     private static Cliente cliente = null;
-    private final static ListaClientes listClientes = new ListaClientes(20);
-    private final static ListaCuentas listCuentas = new ListaCuentas(200);
+    private static ListaClientes listClientes = new ListaClientes(20);
+    private static ListaCuentas listCuentas = new ListaCuentas(200);
     static int codigoSucursal;
 
     public static void main(String[] args) throws IOException {
@@ -81,12 +81,12 @@ public class Banco {
         do {
             System.out.print("Introduce el nombre: ");
             nombre1 = scan.next();
-        } while (!cliente.validacionNombre(nombre1));
+        } while (!Cliente.validacionNombre(nombre1));
 
         do {
             System.out.print("Introduce los apellidos: ");
             apellidos1 = scan.next();
-        } while (!cliente.validacionApellidos(apellidos1));
+        } while (!Cliente.validacionApellidos(apellidos1));
 
         do {
             System.out.println("Introduce la fecha de nacimiento");
@@ -109,7 +109,7 @@ public class Banco {
         do {
             System.out.print("Introduce el correo: ");
             correoElectronico1 = scan.next();
-        } while (!cliente.validacionCorreo(correoElectronico1) || !cliente.validacionCorreoRepetido(correoElectronico1, listClientes));
+        } while (!Cliente.validacionCorreo(correoElectronico1) || !Cliente.validacionCorreoRepetido(correoElectronico1, listClientes));
 
         do {
             do {
@@ -122,13 +122,13 @@ public class Banco {
             dniLet = Character.toUpperCase(dniLet);
             dni1 = String.valueOf(dniNum) + dniLet;
 
-            if(dni1.length() == 8){
-                dni1 = "0" + dni1;
-            }else if(dni1.length() == 7){
-                dni1 = "00" + dni1;
+            for (int i = 0; i < dni1.length(); i++) {
+                if (dni1.length() < 9){
+                    dni1 = "0" + dni1;
+                }
             }
 
-        } while (!cliente.validacionDNI(dniNum, dniLet) || !cliente.validacionDniRepetido(dni1, listClientes));
+        } while (!Cliente.validacionDNI(dniNum, dniLet) || !Cliente.validacionDniRepetido(dni1, listClientes));
 
         System.out.println("DNI: " + dni1);
 
@@ -145,11 +145,19 @@ public class Banco {
 
         Scanner scan = new Scanner(System.in);
         Cliente clienteCuenta;
+        long numeroCuenta;
 
         if(cliente == null){
             System.out.println("***Debes darse de alta primero***");
         }else{
-            long numeroCuenta = cuenta.fNumeroCuenta();
+            numeroCuenta = Cuenta.fNumeroCuenta();
+
+            for(int i = 0; i < listCuentas.getNumCuentas(); i++){
+                if(listCuentas.getCuentaPos(i).getNumeroCuenta() == numeroCuenta){
+                    numeroCuenta = Cuenta.fNumeroCuenta();
+                }
+            }
+
             int digitoControl;
             String dni, iban;
 
@@ -172,9 +180,9 @@ public class Banco {
                     tipoCuenta = menuTipoCuenta();
                 }
 
-                digitoControl = cuenta.fDigitoControl(numeroCuenta, codigoSucursal);
+                digitoControl = Cuenta.fDigitoControl(numeroCuenta, codigoSucursal);
 
-                iban = cuenta.fIban(numeroCuenta, digitoControl, codigoSucursal);
+                iban = Cuenta.fIban(numeroCuenta, digitoControl, codigoSucursal);
 
                 System.out.printf("Tu numero de cuenta bancaria nuevo es: %2s\n", iban);
 
@@ -625,6 +633,7 @@ public class Banco {
         }while(option < 0 || option > i);
 
         codigoSucursal = Integer.parseInt(datos[option-1][1]);
+        System.out.println("*** Has elegido la sucursal " + datos[option-1][0] + " ***");
 
         br.close();
 
@@ -649,7 +658,7 @@ public class Banco {
                     double saldo = listCuentas.getCuentaPos(i).saldoFichero(listCuentas.getCuentaPos(j));
                     bw.write(String.format("%10.2f", saldo));
                 }
-            }
+        }
 
         System.out.println("*** Fichero creado correctamente ***");
 

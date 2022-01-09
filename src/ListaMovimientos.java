@@ -2,7 +2,7 @@ public class ListaMovimientos {
 
     private int numMovimientos;
     private static final int MAX_MOVIMIENTOS = 50;
-    private final Movimiento[] listaMovimientos;
+    private Movimiento[] listaMovimientos;
 
     public ListaMovimientos() {
         this.listaMovimientos = new Movimiento[MAX_MOVIMIENTOS];
@@ -16,12 +16,12 @@ public class ListaMovimientos {
         return numMovimientos;
     }
 
-    public void addMovimiento(Movimiento movimiento) {
+    public void addMovimiento(Movimiento movimiento) {    //Añade un movimiento a la lista
         this.listaMovimientos[numMovimientos] = movimiento;
         numMovimientos++;
     }
 
-    public void imprimirTodosMovimientos() {
+    public void imprimirTodosMovimientos() {    //Imprime todos los movimientos de la lista
         for (int i = 0; i < numMovimientos; i++) {
             listaMovimientos[i].imprimirMovimiento();
         }

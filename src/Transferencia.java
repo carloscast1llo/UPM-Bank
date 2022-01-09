@@ -1,8 +1,8 @@
 public class Transferencia {
 
-    private final String cuentaEmisor;
-    private final String cuentaReceptor;
-    private final double importe;
+    private String cuentaEmisor;
+    private String cuentaReceptor;
+    private double importe;
 
     public Transferencia(String cuentaEmisor, String cuentaReceptor, double importe) {
         this.cuentaEmisor = cuentaEmisor;
@@ -13,16 +13,15 @@ public class Transferencia {
     public double getImporte() {
         return importe;
     }
-
     public String getCuentaReceptor() {
         return cuentaReceptor;
     }
 
-    public void imprimirTransferenciaEmitida(){
+    public void imprimirTransferenciaEmitida(){     // Imprime la transferencia que se ha emitido
         System.out.println("\t\t\t\t\t[" + cuentaEmisor + "] envia " + importe + " a [" + cuentaReceptor + "]");
     }
 
-    public void imprimirTransferenciaRecibida(){
+    public void imprimirTransferenciaRecibida(){     // Imprime la transferencia que se ha recibido
         System.out.println("\t\t\t\t\t[" + cuentaReceptor + "] recibe " + importe + " de [" + cuentaEmisor + "]");
     }
 

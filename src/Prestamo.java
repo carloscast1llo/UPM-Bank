@@ -1,8 +1,8 @@
 public class Prestamo {
 
-    private final double capital;
-    private final int numeroAnios;
-    private final double interesAnual;
+    private double capital;
+    private int numeroAnios;
+    private double interesAnual;
 
     public Prestamo(double capital, int numeroAnios, double interesAnual) {
         this.capital = capital;
@@ -14,7 +14,7 @@ public class Prestamo {
         return capital;
     }
 
-    public void imprimirPrestamo(){
+    public void imprimirPrestamo(){     // Imprime el prestamo
 
         System.out.println("\t\t\t\tCapital: " + capital + "€ --> " + "Numero de años: " + numeroAnios + " --> " + "Interes anual: " + interesAnual + "%");
 

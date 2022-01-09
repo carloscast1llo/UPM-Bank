@@ -1,9 +1,9 @@
 public class Cliente {
 
-    private final String nombre;
-    private final String apellidos;
-    private final String correoElectronico;
-    private final String dni;
+    private String nombre;
+    private String apellidos;
+    private String correoElectronico;
+    private String dni;
     Fecha diaNacimiento;
     ListaCuentas cuentas;
 
@@ -26,6 +26,7 @@ public class Cliente {
         return cuentas;
     }
 
+    //Validaciones para la creacion del cliente
     public static boolean validacionNombre(String nombre){
         boolean correcto = true;
         if(nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5") || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9")){
@@ -86,7 +87,7 @@ public class Cliente {
         return repetido;
     }
 
-    public void imprimirCliente(){
+    public void imprimirCliente(){   //Imprime todos los datos del cliente
 
         System.out.println("Nombre: " + nombre);
         System.out.println("Apellidos: " + apellidos);
@@ -100,7 +101,7 @@ public class Cliente {
 
     }
 
-    public void imprimirCuentaCliente(){
+    public void imprimirCuentaCliente(){    //Imprime todos los datos de la cuenta del cliente
         cuentas.imprimirTodasCuentas();
     }
 

@@ -1,19 +1,19 @@
 public class Movimiento {
 
-    private final double importe;
-    private final Movimiento.TipoMovimiento tipoMovimiento;
+    private double importe;
+    private Movimiento.TipoMovimiento tipoMovimiento;
 
     public Movimiento(Movimiento.TipoMovimiento tipoMovimiento, double importe) {
         this.tipoMovimiento = tipoMovimiento;
         this.importe = importe;
     }
 
-    enum TipoMovimiento {
+    enum TipoMovimiento {   // Enum para los tipos de movimientos
         Deposito,
         Extraccion
     }
 
-    public void imprimirMovimiento() {
+    public void imprimirMovimiento() {  // Imprime el movimiento
         System.out.println("\t\t\t\t" + tipoMovimiento + " --> " + importe + "€");
     }
 

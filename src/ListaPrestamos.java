@@ -2,7 +2,7 @@ public class ListaPrestamos {
 
     private int numPrestamos;
     private final int MAX_PRESTAMOS = 50;
-    private final Prestamo[] prestamos;
+    private Prestamo[] prestamos;
 
     public ListaPrestamos() {
         this.prestamos = new Prestamo[MAX_PRESTAMOS];
@@ -16,16 +16,17 @@ public class ListaPrestamos {
         return MAX_PRESTAMOS;
     }
 
-    public void addPrestamo(Prestamo prestamo) {
+    public void addPrestamo(Prestamo prestamo) {    // Añade un prestamo a la lista de prestamos
         this.prestamos[numPrestamos] = prestamo;
         numPrestamos++;
     }
 
-    public void imprimirTodosPrestamos(){
+    public void imprimirTodosPrestamos(){    // Imprime todos los prestamos de la lista
 
         for (int i = 0; i < numPrestamos; i++) {
             prestamos[i].imprimirPrestamo();
         }
+
     }
 
 }

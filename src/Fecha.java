@@ -1,8 +1,8 @@
 public class Fecha {
 
-        private final int dia;
-        private final int mes;
-        private final int year;
+        private int dia;
+        private int mes;
+        private int year;
 
         public Fecha(int dia, int mes, int year) {
             this.dia=dia;
